@@ -25,15 +25,15 @@ std::tuple<SandboxAccount, Error> SandboxRestClient::Register(BrokerAccountType 
                                cpr::Bearer{token},
                                cpr::VerifySsl{false});
     
-    Json json = Json::parse(response.text);
-    
     if (response.status_code == 200) {
+        Json json = Json::parse(response.text);
         return  {
                     SandboxAccount(toBrokerAccountType(json["payload"]["brokerAccountType"].get<std::string>()), 
                                     json["payload"]["brokerAccountId"].get<std::string>()), 
                     {"", "Ok"}
                 };
     } else if (response.status_code == 500) {
+        Json json = Json::parse(response.text);
         return { SandboxAccount(), {json["payload"]["message"], json["payload"]["code"]} };
     } 
 
@@ -58,8 +58,8 @@ Error SandboxRestClient::SetCurrencyBalance(std::string& id, Currency cur, doubl
                                         cpr::Bearer{token},
                                         cpr::VerifySsl{false});
 
-    Json json = Json::parse(response.text);
     if (response.status_code == 500) {
+        Json json = Json::parse(response.text);
         return {json["payload"]["message"], json["payload"]["code"]};
     } else if (response.status_code != 200) {
         return {"Invalid Response", "Error"};
@@ -85,8 +85,8 @@ Error SandboxRestClient::SetPositionsBalance(std::string& id, std::string figi, 
                                         cpr::Bearer{token},
                                         cpr::VerifySsl{false});
 
-    Json json = Json::parse(response.text);
     if (response.status_code == 500) {
+        Json json = Json::parse(response.text);
         return {json["payload"]["message"], json["payload"]["code"]};
     } else if (response.status_code != 200) {
         return {"Invalid Response", "Error"};
@@ -105,8 +105,8 @@ Error SandboxRestClient::Remove(std::string& id) {
                                         cpr::Bearer{token},
                                         cpr::VerifySsl{false});
 
-    Json json = Json::parse(response.text);
     if (response.status_code == 500) {
+        Json json = Json::parse(response.text);
         return {json["payload"]["message"], json["payload"]["code"]};
     } else if (response.status_code != 200) {
         return {"Invalid Response", "Error"};
@@ -125,8 +125,8 @@ Error SandboxRestClient::Clear(std::string& id) {
                                         cpr::Bearer{token},
                                         cpr::VerifySsl{false});
 
-    Json json = Json::parse(response.text);
     if (response.status_code == 500) {
+        Json json = Json::parse(response.text);
         return {json["payload"]["message"], json["payload"]["code"]};
     } else if (response.status_code != 200) {
         return {"Invalid Response", "Error"};
