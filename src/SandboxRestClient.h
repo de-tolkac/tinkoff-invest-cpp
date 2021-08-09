@@ -2,9 +2,17 @@
 
 #include <SandboxAccount.h>
 #include <Currency.h>
+#include <Order.h>
+#include <OperationType.h>
+#include <PlacedLimitOrder.h>
+#include <PlacedMarketOrder.h>
+#include <PortfolioPosition.h>
+#include <CurrencyPosition.h>
+#include <Portfolio.h>
 
 #include <string>
 #include <utility>
+#include <vector>
 
 class SandboxRestClient {
     std::string token;
@@ -14,9 +22,21 @@ public:
     SandboxRestClient(char*);
     ~SandboxRestClient();
 
+    // Sandbox
     std::pair<SandboxAccount, Error> Register(BrokerAccountType);
     Error SetCurrencyBalance(std::string&, Currency, double);
     Error SetPositionsBalance(std::string&, std::string, double);
     Error Remove(std::string&);
     Error Clear(std::string&);
+
+    // Orders
+    std::pair<std::vector<Order>, Error> Orders(std::string&);
+    std::pair<PlacedLimitOrder, Error> LimitOrder(std::string&, std::string&, int, OperationType, double);
+    std::pair<PlacedMarketOrder, Error> MarketOrder(std::string&, std::string&, int, OperationType);
+    Error OrderCancel(std::string&, std::string&);
+
+    // Portfolio
+    std::pair<PortfolioInfo, Error> Portfolio(std::string&);
+    std::pair<std::vector<PortfolioPosition>, Error> PortfolioPositions(std::string&);
+    std::pair<std::vector<CurrencyPosition>, Error> PortfolioCurrencies(std::string&);
 };
