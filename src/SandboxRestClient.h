@@ -14,6 +14,8 @@
 #include <CandleInterval.h>
 #include <Candle.h>
 #include <SearchMarketInstrument.h>
+#include <Operation.h>
+#include <UserAccount.h>
 
 #include <string>
 #include <utility>
@@ -55,4 +57,10 @@ public:
     std::pair<std::vector<Candle>, Error> Candles(std::string&, time_t&, time_t&, CandleInterval&);
     std::pair<SearchMarketInstrument, Error> GetIntsrumentByFIGI(std::string&);
     std::pair<std::vector<MarketInstrument>, Error> GetInstrumentByTicker(std::string&);
+
+    // Operations
+    std::pair<std::vector<Operation>, Error> Operations(std::string&, time_t&, time_t&, std::string&);
+
+    // User
+    std::pair<std::vector<UserAccount>, Error> Accounts();
 };
