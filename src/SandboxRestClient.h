@@ -9,10 +9,16 @@
 #include <PortfolioPosition.h>
 #include <CurrencyPosition.h>
 #include <Portfolio.h>
+#include <MarketInstrument.h>
+#include <OrderBook.h>
+#include <CandleInterval.h>
+#include <Candle.h>
+#include <SearchMarketInstrument.h>
 
 #include <string>
 #include <utility>
 #include <vector>
+#include <ctime>
 
 class SandboxRestClient {
     std::string token;
@@ -39,4 +45,14 @@ public:
     std::pair<PortfolioInfo, Error> Portfolio(std::string&);
     std::pair<std::vector<PortfolioPosition>, Error> PortfolioPositions(std::string&);
     std::pair<std::vector<CurrencyPosition>, Error> PortfolioCurrencies(std::string&);
+
+    // Market
+    std::pair<std::vector<MarketInstrument>, Error> Stocks();
+    std::pair<std::vector<MarketInstrument>, Error> Bonds();
+    std::pair<std::vector<MarketInstrument>, Error> ETFs();
+    std::pair<std::vector<MarketInstrument>, Error> Currencies();
+    std::pair<OrderBook, Error> Orderbook(std::string&, int);
+    std::pair<std::vector<Candle>, Error> Candles(std::string&, time_t&, time_t&, CandleInterval&);
+    std::pair<SearchMarketInstrument, Error> GetIntsrumentByFIGI(std::string&);
+    std::pair<std::vector<MarketInstrument>, Error> GetInstrumentByTicker(std::string&);
 };
