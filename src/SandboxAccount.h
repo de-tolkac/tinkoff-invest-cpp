@@ -4,8 +4,7 @@
 #include <BrokerAccountType.h>
 
 #include <string>
-#include <tuple>
-
+#include <utility>
 
 struct SandboxAccount {
     BrokerAccountType brokerAccountType;
@@ -17,14 +16,14 @@ struct SandboxAccount {
         brokerAccountId = id;
     }
 
-    SandboxAccount(std::tuple<SandboxAccount, Error>&& t) {
-        brokerAccountType = std::get<SandboxAccount>(t).brokerAccountType;
-        brokerAccountId   = std::get<SandboxAccount>(t).brokerAccountId;
+    SandboxAccount(std::pair<SandboxAccount, Error>&& t) {
+        brokerAccountType = t.first.brokerAccountType;
+        brokerAccountId   = t.first.brokerAccountId;
     }
 
-    SandboxAccount& operator=(std::tuple<SandboxAccount, Error>&& t) {
-        brokerAccountType = std::get<SandboxAccount>(t).brokerAccountType;
-        brokerAccountId   = std::get<SandboxAccount>(t).brokerAccountId;
+    SandboxAccount& operator=(std::pair<SandboxAccount, Error>&& t) {
+        brokerAccountType = t.first.brokerAccountType;
+        brokerAccountId   = t.first.brokerAccountId;
         return *this;
     }
 };

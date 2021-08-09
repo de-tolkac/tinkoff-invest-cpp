@@ -19,7 +19,7 @@ SandboxRestClient::SandboxRestClient(std::string& _token)
 
 SandboxRestClient::~SandboxRestClient() { }
 
-std::tuple<SandboxAccount, Error> SandboxRestClient::Register(BrokerAccountType t) {
+std::pair<SandboxAccount, Error> SandboxRestClient::Register(BrokerAccountType t) {
     cpr::Response response = cpr::Post(cpr::Url{URL::Sandbox::Register},
                                cpr::Body{"{\"brokerAccountType\": \"" + toString(t) + "\"}"},
                                cpr::Bearer{token},
