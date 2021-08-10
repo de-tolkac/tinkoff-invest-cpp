@@ -8,7 +8,7 @@ Documentation in progress...
     * :heavy_check_mark: /sandbox/positions/balance **\[POST\]**
     * :heavy_check_mark: /sandbox/remove **\[POST\]**
     * :heavy_check_mark: /sandbox/clear **\[POST\]**
-* :x: orders
+* :heavy_check_mark: orders
 * :x: portfolio
 * :x: market
 * :x: operations
