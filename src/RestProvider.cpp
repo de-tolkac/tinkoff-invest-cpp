@@ -137,7 +137,11 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
         return result;
     } else if (response.status_code == 500) {
         Json json = Json::parse(response.text);
-        std::cout << 500 << std::endl;
+        
+        result.second.message = json["payload"]["message"];
+        result.second.code = json["payload"]["code"];
+
+        return result;
     }
 
     result.second.message = "Invalid Response";
