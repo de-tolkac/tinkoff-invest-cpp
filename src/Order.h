@@ -3,8 +3,13 @@
 #include <OperationType.h>
 #include <OrderStatus.h>
 #include <OrderType.h>
+#include <utils.h>
 
 #include <string>
+
+#include <nlohmann/json.hpp>
+
+using Json = nlohmann::json;
 
 struct Order {
     std::string orderId;
@@ -20,3 +25,6 @@ struct Order {
 
     double price;
 };
+
+void to_json(Json&, const Order&);
+void from_json(const Json&, Order&);
