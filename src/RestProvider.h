@@ -21,7 +21,12 @@
 #include <ctime>
 
 class RestProvider {
+    std::string token;
 protected:
+    RestProvider() = delete;
+    RestProvider(std::string&);
+    RestProvider(char*);
+
     // Orders
     std::pair<std::vector<Order>, Error> Orders(const char*, std::string&);
     std::pair<PlacedLimitOrder, Error> LimitOrder(const char*, std::string&, std::string&, int, OperationType, double);

@@ -10,11 +10,13 @@
 using Json = nlohmann::json;
 
 SandboxRestClient::SandboxRestClient(char* _token) 
-    : token(_token)
+    : RestProvider(_token)
+    , token(_token)
 {}
 
 SandboxRestClient::SandboxRestClient(std::string& _token) 
-    : token(_token)
+    : RestProvider(_token)
+    , token(_token)
 {}
 
 SandboxRestClient::~SandboxRestClient() { }
