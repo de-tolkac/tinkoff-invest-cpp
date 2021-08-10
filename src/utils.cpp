@@ -41,7 +41,7 @@ std::string toString(BrokerAccountType& t) {
     return "TinkoffIis";
 }
 
-std::string toString(OrderStatus& s) {
+std::string toString(const OrderStatus& s) {
     switch (s) {
     case OrderStatus::New:
         return "New";
@@ -75,12 +75,20 @@ std::string toString(OrderStatus& s) {
     }
 }
 
-std::string toString(OperationType& t) {
+std::string toString(const OperationType& t) {
     if (t == OperationType::Buy) {
         return "Buy";
     }
 
     return "Sell";
+}
+
+std::string toString(const OrderType& t) {
+    if (t == OrderType::Limit) {
+        return "Limit";
+    }
+
+    return "Market";
 }
 
 OrderStatus toOrderStatus(std::string&& s) {
