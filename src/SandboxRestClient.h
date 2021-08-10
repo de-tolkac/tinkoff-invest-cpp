@@ -17,12 +17,14 @@
 #include <Operation.h>
 #include <UserAccount.h>
 
+#include <RestProvider.h>
+
 #include <string>
 #include <utility>
 #include <vector>
 #include <ctime>
 
-class SandboxRestClient {
+class SandboxRestClient : private RestProvider {
     std::string token;
 public:
     SandboxRestClient() = delete;
@@ -59,7 +61,7 @@ public:
     std::pair<std::vector<MarketInstrument>, Error> GetInstrumentByTicker(std::string&);
 
     // Operations
-    std::pair<std::vector<Operation>, Error> Operations(std::string&, time_t&, time_t&, std::string&);
+    std::pair<std::vector<Operation>, Error> Operations(std::string&, std::string&, time_t&, time_t&);
 
     // User
     std::pair<std::vector<UserAccount>, Error> Accounts();

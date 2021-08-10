@@ -22,7 +22,7 @@ namespace URL {
         // Market
         constexpr char MarketStocks[]         = "https://api-invest.tinkoff.ru/openapi/sandbox/market/stocks";
         constexpr char MarketBonds[]          = "https://api-invest.tinkoff.ru/openapi/sandbox/market/bonds";
-        constexpr char MarketEtfs[]           = "https://api-invest.tinkoff.ru/openapi/sandbox/market/etfs";
+        constexpr char MarketETFs[]           = "https://api-invest.tinkoff.ru/openapi/sandbox/market/etfs";
         constexpr char MarketCurrencies[]     = "https://api-invest.tinkoff.ru/openapi/sandbox/market/currencies";
         constexpr char MarketOrderbook[]      = "https://api-invest.tinkoff.ru/openapi/sandbox/market/orderbook";
         constexpr char MarketCandles[]        = "https://api-invest.tinkoff.ru/openapi/sandbox/market/candles";
@@ -50,7 +50,7 @@ namespace URL {
         // Market
         constexpr char MarketStocks[]         = "https://api-invest.tinkoff.ru/openapi/market/stocks";
         constexpr char MarketBonds[]          = "https://api-invest.tinkoff.ru/openapi/market/bonds";
-        constexpr char MarketEtfs[]           = "https://api-invest.tinkoff.ru/openapi/market/etfs";
+        constexpr char MarketETFs[]           = "https://api-invest.tinkoff.ru/openapi/market/etfs";
         constexpr char MarketCurrencies[]     = "https://api-invest.tinkoff.ru/openapi/market/currencies";
         constexpr char MarketOrderbook[]      = "https://api-invest.tinkoff.ru/openapi/market/orderbook";
         constexpr char MarketCandles[]        = "https://api-invest.tinkoff.ru/openapi/market/candles";

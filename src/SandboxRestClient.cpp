@@ -133,3 +133,76 @@ Error SandboxRestClient::Clear(std::string& id) {
     }
     return {"", "Ok"};
 }
+
+// Orders
+std::pair<std::vector<Order>, Error> SandboxRestClient::Orders(std::string& id) {
+    return RestProvider::Orders(URL::Sandbox::Orders, id);
+}
+
+std::pair<PlacedLimitOrder, Error> SandboxRestClient::LimitOrder(std::string& id, std::string& figi, int lots, OperationType operation, double price) {
+    return RestProvider::LimitOrder(URL::Sandbox::OrdersLimitOrder, id, figi, lots, operation, price);
+}
+
+std::pair<PlacedMarketOrder, Error> SandboxRestClient::MarketOrder(std::string& id, std::string& figi, int lots, OperationType operation) {
+    return RestProvider::MarketOrder(URL::Sandbox::OrdersMarketOrder, id, figi, lots, operation);
+}
+
+Error SandboxRestClient::OrderCancel(std::string& id, std::string& orderId) {
+    return RestProvider::OrderCancel(URL::Sandbox::OrdersCancel, id, orderId);
+}
+
+// Portfolio
+std::pair<PortfolioInfo, Error> SandboxRestClient::Portfolio(std::string& id) {
+    return RestProvider::Portfolio(URL::Sandbox::Portfolio, URL::Sandbox::PortfolioCurrencies, id);
+}
+
+std::pair<std::vector<PortfolioPosition>, Error> SandboxRestClient::PortfolioPositions(std::string& id) {
+    return RestProvider::PortfolioPositions(URL::Sandbox::Portfolio, id);
+}
+
+std::pair<std::vector<CurrencyPosition>, Error> SandboxRestClient::PortfolioCurrencies(std::string& id) {
+    return RestProvider::PortfolioCurrencies(URL::Sandbox::PortfolioCurrencies, id);
+}
+
+// Market
+std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Stocks() {
+    return RestProvider::Stocks(URL::Sandbox::MarketStocks);
+}
+
+std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Bonds() {
+    return RestProvider::Bonds(URL::Sandbox::MarketBonds);
+}
+
+std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::ETFs() {
+    return RestProvider::ETFs(URL::Sandbox::MarketETFs);
+}
+
+std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Currencies() {
+    return RestProvider::Currencies(URL::Sandbox::MarketCurrencies);
+}
+
+std::pair<OrderBook, Error> SandboxRestClient::Orderbook(std::string& figi, int depth) {
+    return RestProvider::Orderbook(URL::Sandbox::MarketOrderbook, figi, depth);
+}
+
+std::pair<std::vector<Candle>, Error> SandboxRestClient::Candles(std::string& figi, time_t& from, time_t& to, CandleInterval& interval) {
+    return RestProvider::Candles(URL::Sandbox::MarketCandles, figi, from, to, interval);
+}
+
+std::pair<SearchMarketInstrument, Error> SandboxRestClient::GetIntsrumentByFIGI(std::string& figi) {
+    return RestProvider::GetIntsrumentByFIGI(URL::Sandbox::MarketSearchByFigi, figi);
+}
+
+std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::GetInstrumentByTicker(std::string& ticker) {
+    return RestProvider::GetInstrumentByTicker(URL::Sandbox::MarketSearchByTicker, ticker);
+}
+
+// Operations
+std::pair<std::vector<Operation>, Error> SandboxRestClient::Operations(std::string& id, std::string& figi, time_t& from, time_t& to) {
+    return RestProvider::Operations(URL::Sandbox::Operations, id, figi, from, to);
+}
+
+// User
+std::pair<std::vector<UserAccount>, Error> SandboxRestClient::Accounts() {
+    return RestProvider::Accounts(URL::Sandbox::UserAccounts);
+}
