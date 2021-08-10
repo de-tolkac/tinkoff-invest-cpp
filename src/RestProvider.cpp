@@ -36,100 +36,17 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
         Json json = Json::parse(response.text);
 
         for (auto& o : json["payload"]) {
-            Order order;
-
-            order.orderId = o["orderId"];
-            order.figi = o["figi"];
-            
-            if (o["operation"] == "Buy") {
-                order.operation = OperationType::Buy;
-            } else if (o["operation"] == "Sell") {
-                order.operation = OperationType::Sell;
-            } else {
+            try {
+                Order order = o.get<Order>();
+                result.first.push_back(order);
+            } catch (std::string error) {
                 result.first.clear();
                 
-                result.second.message = "Invalid Response (Invalid Operation Type - \"";
-                result.second.message += o["operation"];
-                result.second.message += "\")";
-
+                result.second.message = error;
                 result.second.code = "Error";
 
                 return result;
             }
-
-            try {
-                order.status = toOrderStatus(o["status"]);
-            } catch (...) {
-                result.first.clear();
-
-                result.second.message = "Invalid Response (Invalid Order Status - \"";
-                result.second.message += o["status"];
-                result.second.message += "\")";
-
-                result.second.code = "Error";
-
-                return result;
-            }
-
-            try {
-                order.requestedLots = std::stoi(o["requestedLots"].get<std::string>());
-            } catch(...) {
-                result.first.clear();
-
-                result.second.message = "Invalid Response (Invalid requestedLots number - \"";
-                result.second.message += o["requestedLots"];
-                result.second.message += "\")";
-
-                result.second.code = "Error";
-
-                return result;
-            }
-
-            try {
-                order.executedLots = std::stoi(o["executedLots"].get<std::string>());
-            } catch(...) {
-                result.first.clear();
-
-                result.second.message = "Invalid Response (Invalid executedLots number - \"";
-                result.second.message += o["executedLots"];
-                result.second.message += "\")";
-
-                result.second.code = "Error";
-
-                return result;
-            }
-
-            if (o["type"] == "Limit") {
-                order.type = OrderType::Limit;
-            } else if (o["type" == "Market"]) {
-                order.type = OrderType::Market;
-            } else {
-                result.first.clear();
-                
-                result.second.message = "Invalid Response (Invalid Order Type - \"";
-                result.second.message += o["type"];
-                result.second.message += "\")";
-
-                result.second.code = "Error";
-
-                return result;
-            }
-
-            try {
-                order.price = std::stod(o["price"].get<std::string>());
-            } catch(...) {
-                result.first.clear();
-                
-                result.second.message = "Invalid Response (Invalid Price - \"";
-                result.second.message += o["price"];
-                result.second.message += "\")";
-
-                result.second.code = "Error";
-
-                return result;
-            }
-
-            result.first.push_back(order);
         }
 
         result.second.code = "Ok";
