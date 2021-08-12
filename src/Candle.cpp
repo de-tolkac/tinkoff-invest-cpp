@@ -27,14 +27,14 @@ void to_json(Json& j, const Candle& candle) {
 void from_json(const Json& j, Candle& candle) {
     try {
         j.at("figi").get_to(candle.figi);
-        candle.interval = toCandleInterval(j.at("interval").get<std::string>());
+        candle.interval = toCandleInterval(j.at("interval"));
         j.at("o").get_to(candle.openPrice);
         j.at("c").get_to(candle.closePrice);
         j.at("h").get_to(candle.highPrice);
         j.at("l").get_to(candle.lowPrice);
         j.at("v").get_to(candle.volume);
 
-        std::string timeBuffer = j.at("time").get<std::string>();
+        std::string timeBuffer = j.at("time");
         struct tm time;
         strptime(timeBuffer.c_str(), "%Y-%m-%dT%H:%M:%S%c%c%c:%c%c", &time);
         candle.time = timegm(&time);
