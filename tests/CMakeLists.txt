@@ -12,14 +12,14 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(json_test "")
-target_sources(json_test PRIVATE json_test.cpp ../src/Candle.cpp ../src/utils.cpp)
+add_executable(candle_json_test "")
+target_sources(candle_json_test PRIVATE candle_json_test.cpp ../src/Candle.cpp ../src/utils.cpp)
 
-target_link_libraries(json_test PRIVATE gtest_main)
+target_link_libraries(candle_json_test PRIVATE gtest_main)
 
 enable_testing()
 
 add_test(
-  	NAME json_test
-  	COMMAND $<TARGET_FILE:json_test>
+  	NAME candle_json_test
+  	COMMAND $<TARGET_FILE:candle_json_test>
 )
