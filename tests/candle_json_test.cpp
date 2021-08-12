@@ -8,17 +8,19 @@
 
 using Json = nlohmann::json;
 
-TEST(json_test, Candle) {
-    Json j = R"({
-        "figi": "testFigi123456789",
-        "interval": "1min",
-        "o": 10.0,
-        "c": 20.1,
-        "h": 30.2,
-        "l": 40.3,
-        "v": 50.4,
-        "time": "2019-08-19T18:38:33+03:00"
-      })"_json;
+TEST(json_test, Candle_get) {
+    Json j = R"(
+        {
+            "figi": "testFigi123456789",
+            "interval": "1min",
+            "o": 10.0,
+            "c": 20.1,
+            "h": 30.2,
+            "l": 40.3,
+            "v": 50.4,
+            "time": "2019-08-19T18:38:33+03:00"
+        }
+    )"_json;
 
     Candle candle1;
     candle1.figi = "testFigi123456789";
