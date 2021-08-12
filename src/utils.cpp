@@ -71,14 +71,6 @@ std::string toString(const OrderStatus& s) {
     }
 }
 
-std::string toString(const OperationType& t) {
-    if (t == OperationType::Buy) {
-        return "Buy";
-    }
-
-    return "Sell";
-}
-
 std::string toString(const OrderType& t) {
     if (t == OrderType::Limit) {
         return "Limit";
@@ -123,6 +115,53 @@ std::string toString(const CandleInterval& i) {
         return "month";
         break;
     }
+}
+
+std::string toString(const InstrumentType& i) {
+    switch (i) {
+    case InstrumentType::Stock:
+        return "Stock";
+        break;
+    case InstrumentType::Currency:
+        return "Currency";
+        break;
+    case InstrumentType::Bond:
+        return "Bond";
+        break;
+    case InstrumentType::Etf:
+        return "Etf";
+        break;
+    }
+}
+
+std::string toString(const OperationStatus& o) {
+    switch (o) {
+    case OperationStatus::Done:
+        return "Done";
+        break;
+    case OperationStatus::Decline:
+        return "Decline";
+        break;
+    case OperationStatus::Progress:
+        return "Progress";
+        break;
+    }
+}
+
+std::string toString(const OperationType& o) {
+    if (o == OperationType::Buy) {
+        return "Buy";
+    } 
+
+    return "Sell";
+}
+
+std::string toString(const TradeStatus& s) {
+    if (s == TradeStatus::NormalTrading) {
+        return "NormalTrading";
+    }
+
+    return "NotAvailableForTrading";
 }
 
 Currency toCurrency(std::string&& c) {
@@ -212,4 +251,58 @@ CandleInterval toCandleInterval(std::string&& i) {
     std::string message = "Invalid Candle Resolution: ";
     message += i;
     throw message; 
+}
+
+InstrumentType toInstrumentType(std::string&& i) {
+    if (i == "Stock") {
+        return InstrumentType::Stock;
+    } else if (i == "Currency") {
+        return InstrumentType::Currency;
+    } else if (i == "Bond") {
+        return InstrumentType::Bond;
+    } else if (i == "Etf") {
+        return InstrumentType::Etf;
+    }
+
+    std::string message = "Invalid Instrument Type: ";
+    message += i;
+    throw message; 
+}
+
+OperationStatus toOperationStatus(std::string&& o) {
+    if (o == "Done") {
+        return OperationStatus::Done;
+    } else if (o == "Decline") {
+        return OperationStatus::Decline;
+    } else if (o == "Progress") {
+        return OperationStatus::Progress;
+    }
+
+    std::string message = "Invalid Operation Status: ";
+    message += o;
+    throw message; 
+}
+
+OperationType toOperationType(std::string&& o) {
+    if (o == "Buy") {
+        return OperationType::Buy;
+    } else if (o == "Sell") {
+        return OperationType::Sell;
+    }
+
+    std::string message = "Invalid Operation Type: ";
+    message += o;
+    throw message; 
+}
+
+TradeStatus toTradeStatus(std::string&& s) {
+    if (s == "NormalTrading") {
+        return TradeStatus::NormalTrading;
+    } else if (s == "NotAvailableForTrading") {
+        return TradeStatus::NotAvailableForTrading;
+    }
+
+    std::string message = "Invalid Trade Status: ";
+    message += s;
+    throw message;     
 }
