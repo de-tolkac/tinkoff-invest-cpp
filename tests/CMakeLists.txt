@@ -14,12 +14,22 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(candle_json_test "")
 target_sources(candle_json_test PRIVATE candle_json_test.cpp ../src/Candle.cpp ../src/utils.cpp)
-
 target_link_libraries(candle_json_test PRIVATE gtest_main)
+
+
+add_executable(currency_position_json_test "")
+target_sources(currency_position_json_test PRIVATE currency_position_json_test.cpp ../src/CurrencyPosition.cpp ../src/utils.cpp)
+target_link_libraries(currency_position_json_test PRIVATE gtest_main)
+
 
 enable_testing()
 
 add_test(
   	NAME candle_json_test
   	COMMAND $<TARGET_FILE:candle_json_test>
+)
+
+add_test(
+  	NAME currency_position_json_test
+  	COMMAND $<TARGET_FILE:currency_position_json_test>
 )
