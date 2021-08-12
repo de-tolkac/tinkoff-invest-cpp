@@ -5,6 +5,10 @@
 #include <string>
 #include <ctime>
 
+#include <nlohmann/json.hpp>
+
+using Json = nlohmann::json;
+
 struct Candle {
     std::string figi;
     
@@ -18,3 +22,8 @@ struct Candle {
 
     time_t time;
 };
+
+void to_json(Json&, const Candle&);
+void from_json(const Json&, Candle&);
+
+bool operator==(const Candle&, const Candle&);
