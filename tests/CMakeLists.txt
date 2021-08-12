@@ -13,7 +13,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_executable(json_test "")
-target_sources(json_test PRIVATE json_test.cpp)
+target_sources(json_test PRIVATE json_test.cpp ../src/Candle.cpp ../src/utils.cpp)
 
 target_link_libraries(json_test PRIVATE gtest_main)
 
