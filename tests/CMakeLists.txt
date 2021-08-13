@@ -21,6 +21,9 @@ add_executable(currency_position_json_test "")
 target_sources(currency_position_json_test PRIVATE currency_position_json_test.cpp ../src/CurrencyPosition.cpp ../src/utils.cpp)
 target_link_libraries(currency_position_json_test PRIVATE gtest_main)
 
+add_executable(market_instrument_json_test "")
+target_sources(market_instrument_json_test PRIVATE market_instrument_json_test.cpp ../src/MarketInstrument.cpp ../src/utils.cpp)
+target_link_libraries(market_instrument_json_test PRIVATE gtest_main)
 
 enable_testing()
 
@@ -32,4 +35,9 @@ add_test(
 add_test(
   	NAME currency_position_json_test
   	COMMAND $<TARGET_FILE:currency_position_json_test>
+)
+
+add_test(
+  	NAME market_instrument_json_test
+  	COMMAND $<TARGET_FILE:market_instrument_json_test>
 )
