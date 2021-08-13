@@ -164,6 +164,85 @@ std::string toString(const TradeStatus& s) {
     return "NotAvailableForTrading";
 }
 
+std::string toString(const time_t& time) {
+    char timeBuffer[26];
+    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S%z", gmtime(&time));
+    timeBuffer[25] = '\0';
+    timeBuffer[24] = timeBuffer[23];
+    timeBuffer[23] = timeBuffer[22];
+    timeBuffer[22] = ':';
+
+    return timeBuffer;
+}
+
+std::string toString(const OperationTypeWithCommission& o) {
+    switch (o) {
+    case OperationTypeWithCommission::Buy:
+        return "Buy";
+        break;
+    case OperationTypeWithCommission::BuyCard:
+        return "BuyCard";
+        break;
+    case OperationTypeWithCommission::Sell:
+        return "Sell";
+        break;
+    case OperationTypeWithCommission::BrokerCommission:
+        return "BrokerCommission";
+        break;
+    case OperationTypeWithCommission::ExchangeCommission:
+        return "ExchangeCommission";
+        break;
+    case OperationTypeWithCommission::ServiceCommission:
+        return "ServiceCommission";
+        break;
+    case OperationTypeWithCommission::MarginCommission:
+        return "MarginCommission";
+        break;
+    case OperationTypeWithCommission::OtherCommission:
+        return "OtherCommission";
+        break;
+    case OperationTypeWithCommission::PayIn:
+        return "PayIn";
+        break;
+    case OperationTypeWithCommission::PayOut:
+        return "PayOut";
+        break;
+    case OperationTypeWithCommission::Tax:
+        return "Tax";
+        break;
+    case OperationTypeWithCommission::TaxLucre:
+        return "TaxLucre";
+        break;
+    case OperationTypeWithCommission::TaxDividend:
+        return "TaxDividend";
+        break;
+    case OperationTypeWithCommission::TaxCoupon:
+        return "TaxCoupon";
+        break;
+    case OperationTypeWithCommission::TaxBack:
+        return "TaxBack";
+        break;
+    case OperationTypeWithCommission::Repayment:
+        return "Repayment";
+        break;
+    case OperationTypeWithCommission::PartRepayment:
+        return "PartRepayment";
+        break;
+    case OperationTypeWithCommission::Coupon:
+        return "Coupon";
+        break;
+    case OperationTypeWithCommission::Dividend:
+        return "Dividend";
+        break;
+    case OperationTypeWithCommission::SecurityIn:
+        return "SecurityIn";
+        break;
+    case OperationTypeWithCommission::SecurityOut:
+        return "SecurityOut";
+        break;
+    }
+}
+
 Currency toCurrency(std::string&& c) {
     if (c == "RUB") {
         return Currency::RUB;
@@ -305,4 +384,60 @@ TradeStatus toTradeStatus(std::string&& s) {
     std::string message = "Invalid Trade Status: ";
     message += s;
     throw message;     
+}
+
+OperationTypeWithCommission toOperationTypeWithCommission(std::string&& op) {
+    if (op == "Buy") {
+        return OperationTypeWithCommission::Buy;
+    } else if (op == "BuyCard") {
+        return OperationTypeWithCommission::BuyCard;
+    } else if (op == "Sell") {
+        return OperationTypeWithCommission::Sell;
+    } else if (op == "BrokerCommission") {
+        return OperationTypeWithCommission::BrokerCommission;
+    } else if (op == "ExchangeCommission") {
+        return OperationTypeWithCommission::ExchangeCommission;
+    } else if (op == "ServiceCommission") {
+        return OperationTypeWithCommission::ServiceCommission;
+    } else if (op == "MarginCommission") {
+        return OperationTypeWithCommission::MarginCommission;
+    } else if (op == "OtherCommission") {
+        return OperationTypeWithCommission::OtherCommission;
+    } else if (op == "PayIn") {
+        return OperationTypeWithCommission::PayIn;
+    } else if (op == "PayOut") {
+        return OperationTypeWithCommission::PayOut;
+    } else if (op == "Tax") {
+        return OperationTypeWithCommission::Tax;
+    } else if (op == "TaxLucre") {
+        return OperationTypeWithCommission::TaxLucre;
+    } else if (op == "TaxDividend") {
+        return OperationTypeWithCommission::TaxDividend;
+    } else if (op == "TaxCoupon") {
+        return OperationTypeWithCommission::TaxCoupon;
+    } else if (op == "TaxBack") {
+        return OperationTypeWithCommission::TaxBack;
+    } else if (op == "Repayment") {
+        return OperationTypeWithCommission::Repayment;
+    } else if (op == "PartRepayment") {
+        return OperationTypeWithCommission::PartRepayment;
+    } else if (op == "Coupon") {
+        return OperationTypeWithCommission::Coupon;
+    } else if (op == "Dividend") {
+        return OperationTypeWithCommission::Dividend;
+    } else if (op == "SecurityIn") {
+        return OperationTypeWithCommission::SecurityIn;
+    } else if (op == "SecurityOut") {
+        return OperationTypeWithCommission::SecurityOut;
+    }
+
+    std::string message = "Invalid Operation Type With Commission: ";
+    message += op;
+    throw message; 
+}
+
+time_t toDate(std::string&& t) {
+    struct tm time;
+    strptime(t.c_str(), "%Y-%m-%dT%H:%M:%S%c%c%c:%c%c", &time);
+    return timegm(&time);
 }
