@@ -34,10 +34,7 @@ void from_json(const Json& j, Candle& candle) {
         j.at("l").get_to(candle.lowPrice);
         j.at("v").get_to(candle.volume);
 
-        std::string timeBuffer = j.at("time");
-        struct tm time;
-        strptime(timeBuffer.c_str(), "%Y-%m-%dT%H:%M:%S%c%c%c:%c%c", &time);
-        candle.time = timegm(&time);
+        candle.time = toDate(j.at("time"));
     }
     catch(std::string error) {
         throw error;   
