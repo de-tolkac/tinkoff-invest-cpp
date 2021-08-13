@@ -13,7 +13,8 @@ FetchContent_MakeAvailable(cpr)
 FetchContent_Declare(json GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent.git GIT_TAG 391786c6c3abdd3eeb993a3154f1f2a4cfe137a0)
 FetchContent_MakeAvailable(json)
 
-set(SOURCE_FILES 
+set(
+    SOURCE_FILES 
     ./src/SandboxRestClient.cpp 
     ./src/utils.cpp 
     ./src/RestClient.cpp 
@@ -23,6 +24,7 @@ set(SOURCE_FILES
     ./src/MoneyAmount.cpp 
     ./src/Candle.cpp
     ./src/CurrencyPosition.cpp
+    ./src/MarketInstrument.cpp
 )
 
 add_library(tinvest SHARED ${SOURCE_FILES})
