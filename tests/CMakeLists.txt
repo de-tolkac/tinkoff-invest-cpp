@@ -25,6 +25,10 @@ add_executable(market_instrument_json_test "")
 target_sources(market_instrument_json_test PRIVATE market_instrument_json_test.cpp ../src/MarketInstrument.cpp ../src/utils.cpp)
 target_link_libraries(market_instrument_json_test PRIVATE gtest_main)
 
+add_executable(money_amount_json_test "")
+target_sources(money_amount_json_test PRIVATE money_amount_json_test.cpp ../src/MoneyAmount.cpp ../src/utils.cpp)
+target_link_libraries(money_amount_json_test PRIVATE gtest_main)
+
 enable_testing()
 
 add_test(
@@ -40,4 +44,9 @@ add_test(
 add_test(
   	NAME market_instrument_json_test
   	COMMAND $<TARGET_FILE:market_instrument_json_test>
+)
+
+add_test(
+  	NAME money_amount_json_test
+  	COMMAND $<TARGET_FILE:money_amount_json_test>
 )
