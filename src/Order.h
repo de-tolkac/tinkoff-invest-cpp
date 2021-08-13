@@ -6,6 +6,7 @@
 #include <utils.h>
 
 #include <string>
+#include <vector>
 
 #include <nlohmann/json.hpp>
 
@@ -28,3 +29,5 @@ struct Order {
 
 void to_json(Json&, const Order&);
 void from_json(const Json&, Order&);
+
+typedef std::vector<Order> OrderList;
