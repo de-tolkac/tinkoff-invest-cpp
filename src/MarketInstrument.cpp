@@ -6,28 +6,52 @@ void to_json(Json& j, const MarketInstrument& instr) {
     j = Json {
                 {"figi", instr.figi},
                 {"ticker", instr.ticker},
-                {"isin", instr.isin},
-                {"minPriceIncrement", std::to_string(instr.minPriceIncrement)},
                 {"lot", std::to_string(instr.lot)},
-                {"minQuantity", std::to_string(instr.minQuantity)},
-                {"currency", toString(instr.currency)},
                 {"name", instr.name},
                 {"type", toString(instr.type)}
              };
+
+    if (instr.isin) {
+        j.push_back({"isin", *instr.isin});
+    }
+
+    if (instr.minPriceIncrement) {
+        j.push_back({"minPriceIncrement", *instr.minPriceIncrement});
+    }
+
+    if (instr.minQuantity) {
+        j.push_back({"minQuantity", *instr.minQuantity});
+    }
+
+    if (instr.currency) {
+        j.push_back({"minQuantity", toString(*instr.currency)});
+    }
 }
 
 void from_json(const Json& j, MarketInstrument& instr) {
     try {
         j.at("figi").get_to(instr.figi);
         j.at("ticker").get_to(instr.ticker);
-        j.at("isin").get_to(instr.isin);
         j.at("name").get_to(instr.name);
-        j.at("minPriceIncrement").get_to(instr.minPriceIncrement);
         j.at("lot").get_to(instr.lot);
-        j.at("minQuantity").get_to(instr.minQuantity);
 
-        instr.currency = toCurrency(j.at("currency"));
         instr.type = toInstrumentType(j.at("type"));
+
+        if (j.contains("isin")) {
+            instr.isin = j["isin"];
+        }
+
+        if (j.contains("minPriceIncrement")) {
+            instr.minPriceIncrement = j["minPriceIncrement"].get<double>();
+        }
+
+        if (j.contains("minQuantity")) {
+            instr.minQuantity = j["minQuantity"].get<int>();
+        }
+
+        if (j.contains("currency")) {
+            instr.currency = toCurrency(j.at("currency"));
+        }
     }
     catch(std::string error) {
         throw error;
