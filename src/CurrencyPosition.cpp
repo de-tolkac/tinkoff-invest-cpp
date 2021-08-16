@@ -8,15 +8,21 @@ void to_json(Json& j, const CurrencyPosition& c) {
     j = Json {
                 {"currency", toString(c.currency)},
                 {"balance", std::to_string(c.balance)},
-                {"blocked", std::to_string(c.blocked)}
              };
+
+    if (c.blocked) {
+        j.push_back({"blocked", std::to_string(*c.blocked)});
+    }
 }
 
 void from_json(const Json& j, CurrencyPosition& c) {
     try {
         c.currency = toCurrency(j.at("currency"));
         j.at("balance").get_to(c.balance);
-        j.at("blocked").get_to(c.blocked);
+        
+        if (j.contains("blocked")) {
+            c.blocked = j["blocked"].get<double>();
+        }
     }
     catch(std::string error) {
         throw error;   

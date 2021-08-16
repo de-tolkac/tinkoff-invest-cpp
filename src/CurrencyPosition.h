@@ -1,5 +1,7 @@
 #pragma once
 
+#include <optional>
+
 #include <Currency.h>
 
 #include <nlohmann/json.hpp>
@@ -10,7 +12,7 @@ struct CurrencyPosition {
     Currency currency;
 
     double balance;
-    double blocked;
+    std::optional<double> blocked;
 };
 
 void to_json(Json&, const CurrencyPosition&);
