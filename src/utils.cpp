@@ -295,6 +295,18 @@ OrderStatus toOrderStatus(std::string&& s) {
     throw message; 
 }
 
+OrderType toOrderType(std::string&& s) {
+    if (s == "Limit") {
+        return OrderType::Limit;
+    } else if (s == "Market") {
+        return OrderType::Market;
+    }
+
+    std::string message = "Invalid order type: ";
+    message += s;
+    throw message; 
+}
+
 BrokerAccountType toBrokerAccountType(std::string&& s) {
     if (s == "Tinkoff") {
         return BrokerAccountType::Tinkoff;

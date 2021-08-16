@@ -29,6 +29,7 @@ std::string toString(const OperationTypeWithCommission&);
 
 Currency toCurrency(std::string&&);
 OrderStatus toOrderStatus(std::string&&);
+OrderType toOrderType(std::string&&);
 BrokerAccountType toBrokerAccountType(std::string&&);
 CandleInterval toCandleInterval(std::string&&);
 InstrumentType toInstrumentType(std::string&&);
