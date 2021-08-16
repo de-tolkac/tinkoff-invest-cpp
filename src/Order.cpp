@@ -31,8 +31,7 @@ void from_json(const Json& j, Order& order) {
         throw error;
     } 
     catch(...) {
-        std::string message = "Invalid Response. It is impossible to parse JSON";
-
+        std::string message = "Impossible to parse JSON to Order structure";
         throw message;
     }
 }
