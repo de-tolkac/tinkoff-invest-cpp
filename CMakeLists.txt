@@ -25,6 +25,8 @@ set(
     ./src/Candle.cpp
     ./src/CurrencyPosition.cpp
     ./src/MarketInstrument.cpp
+    ./src/Operation.cpp
+    ./src/OperationTrade.cpp
 )
 
 add_library(tinvest SHARED ${SOURCE_FILES})
