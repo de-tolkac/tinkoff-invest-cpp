@@ -29,6 +29,14 @@ add_executable(money_amount_json_test "")
 target_sources(money_amount_json_test PRIVATE money_amount_json_test.cpp ../src/MoneyAmount.cpp ../src/utils.cpp)
 target_link_libraries(money_amount_json_test PRIVATE gtest_main)
 
+add_executable(operation_json_test "")
+target_sources(operation_json_test PRIVATE operation_json_test.cpp ../src/Operation.cpp ../src/OperationTrade.cpp ../src/MoneyAmount.cpp ../src/utils.cpp)
+target_link_libraries(operation_json_test PRIVATE gtest_main)
+
+add_executable(operation_trade_json_test "")
+target_sources(operation_trade_json_test PRIVATE operation_trade_json_test.cpp ../src/OperationTrade.cpp ../src/utils.cpp)
+target_link_libraries(operation_trade_json_test PRIVATE gtest_main)
+
 enable_testing()
 
 add_test(
@@ -49,4 +57,14 @@ add_test(
 add_test(
   	NAME money_amount_json_test
   	COMMAND $<TARGET_FILE:money_amount_json_test>
+)
+
+add_test(
+  	NAME operation_json_test
+  	COMMAND $<TARGET_FILE:operation_json_test>
+)
+
+add_test(
+  	NAME operation_trade_json_test
+  	COMMAND $<TARGET_FILE:operation_trade_json_test>
 )

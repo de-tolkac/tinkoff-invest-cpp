@@ -10,30 +10,37 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <optional>
+
+#include <nlohmann/json.hpp>
+
+using Json = nlohmann::json;
 
 struct Operation {
     std::string id;
-    std::string figi;
 
     OperationStatus status;
-
-    std::vector<OperationTrade> trades;
-
-    MoneyAmount commission;
 
     Currency currency;
 
     double payment;
-    double price;
-
-    int quantity;
-    int quantityExecuted;
-
-    InstrumentType instrumentType;
 
     bool isMarginCall;
 
     time_t date;
 
-    OperationTypeWithCommission operationType;
+
+    std::optional<std::vector<OperationTrade>> trades;
+    std::optional<MoneyAmount> commission;
+    std::optional<double> price;
+    std::optional<int> quantity;
+    std::optional<int> quantityExecuted;
+    std::optional<std::string> figi;
+    std::optional<InstrumentType> instrumentType;
+    std::optional<OperationTypeWithCommission> operationType;
 };
+
+void to_json(Json&, const Operation&);
+void from_json(const Json&, Operation&);
+
+bool operator==(const Operation&, const Operation&);
