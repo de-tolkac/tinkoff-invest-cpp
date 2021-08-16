@@ -3,7 +3,6 @@
 #include <OperationType.h>
 #include <OrderStatus.h>
 #include <OrderType.h>
-#include <utils.h>
 
 #include <string>
 #include <vector>
@@ -29,5 +28,7 @@ struct Order {
 
 void to_json(Json&, const Order&);
 void from_json(const Json&, Order&);
+
+bool operator==(const Order&, const Order&);
 
 typedef std::vector<Order> OrderList;

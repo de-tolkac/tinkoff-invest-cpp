@@ -37,6 +37,10 @@ add_executable(operation_trade_json_test "")
 target_sources(operation_trade_json_test PRIVATE operation_trade_json_test.cpp ../src/OperationTrade.cpp ../src/utils.cpp)
 target_link_libraries(operation_trade_json_test PRIVATE gtest_main)
 
+add_executable(order_json_test "")
+target_sources(order_json_test PRIVATE order_json_test.cpp ../src/Order.cpp ../src/utils.cpp)
+target_link_libraries(order_json_test PRIVATE gtest_main)
+
 enable_testing()
 
 add_test(
@@ -67,4 +71,9 @@ add_test(
 add_test(
   	NAME operation_trade_json_test
   	COMMAND $<TARGET_FILE:operation_trade_json_test>
+)
+
+add_test(
+  	NAME order_json_test
+  	COMMAND $<TARGET_FILE:order_json_test>
 )
