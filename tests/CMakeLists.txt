@@ -57,6 +57,10 @@ add_executable(portfolio_position_json_test "")
 target_sources(portfolio_position_json_test PRIVATE portfolio_position_json_test.cpp ../src/PortfolioPosition.cpp ../src/utils.cpp ../src/MoneyAmount.cpp)
 target_link_libraries(portfolio_position_json_test PRIVATE gtest_main)
 
+add_executable(sandbox_account_json_test "")
+target_sources(sandbox_account_json_test PRIVATE sandbox_account_json_test.cpp ../src/SandboxAccount.cpp ../src/utils.cpp)
+target_link_libraries(sandbox_account_json_test PRIVATE gtest_main)
+
 enable_testing()
 
 add_test(
@@ -112,4 +116,9 @@ add_test(
 add_test(
   	NAME portfolio_position_json_test
   	COMMAND $<TARGET_FILE:portfolio_position_json_test>
+)
+
+add_test(
+  	NAME sandbox_account_json_test
+  	COMMAND $<TARGET_FILE:sandbox_account_json_test>
 )

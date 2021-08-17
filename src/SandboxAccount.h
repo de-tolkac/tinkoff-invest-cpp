@@ -6,24 +6,27 @@
 #include <string>
 #include <utility>
 
+#include <nlohmann/json.hpp>
+
+using Json = nlohmann::json;
+
 struct SandboxAccount {
     BrokerAccountType brokerAccountType;
     std::string brokerAccountId;
 
-    SandboxAccount() {}
-    SandboxAccount(BrokerAccountType type, std::string id) {
-        brokerAccountType = type;
-        brokerAccountId = id;
-    }
-
-    SandboxAccount(std::pair<SandboxAccount, Error>&& t) {
-        brokerAccountType = t.first.brokerAccountType;
-        brokerAccountId   = t.first.brokerAccountId;
-    }
-
-    SandboxAccount& operator=(std::pair<SandboxAccount, Error>&& t) {
-        brokerAccountType = t.first.brokerAccountType;
-        brokerAccountId   = t.first.brokerAccountId;
-        return *this;
-    }
+    
+    SandboxAccount();
+    SandboxAccount(BrokerAccountType, std::string);
+    
+    /*
+    SandboxAccount(std::pair<SandboxAccount, Error>&&);
+    SandboxAccount& operator=(std::pair<SandboxAccount, Error>&&);
+    SandboxAccount& operator=(const SandboxAccount&) = default;
+    */
 };
+
+
+void to_json(Json&, const SandboxAccount&);
+void from_json(const Json&, SandboxAccount&);
+
+bool operator==(const SandboxAccount&, const SandboxAccount&);
