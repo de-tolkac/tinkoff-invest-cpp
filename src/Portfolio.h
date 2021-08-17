@@ -9,3 +9,5 @@ struct PortfolioInfo {
     std::vector<PortfolioPosition> positions;
     std::vector<CurrencyPosition> currencies;
 };
+
+bool operator==(const PortfolioInfo&, const PortfolioInfo&);
