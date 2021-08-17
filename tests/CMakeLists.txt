@@ -53,6 +53,10 @@ add_executable(placed_order_json_test "")
 target_sources(placed_order_json_test PRIVATE placed_order_json_test.cpp ../src/PlacedOrder.cpp ../src/utils.cpp ../src/MoneyAmount.cpp)
 target_link_libraries(placed_order_json_test PRIVATE gtest_main)
 
+add_executable(portfolio_position_json_test "")
+target_sources(portfolio_position_json_test PRIVATE portfolio_position_json_test.cpp ../src/PortfolioPosition.cpp ../src/utils.cpp ../src/MoneyAmount.cpp)
+target_link_libraries(portfolio_position_json_test PRIVATE gtest_main)
+
 enable_testing()
 
 add_test(
@@ -103,4 +107,9 @@ add_test(
 add_test(
   	NAME placed_order_json_test
   	COMMAND $<TARGET_FILE:placed_order_json_test>
+)
+
+add_test(
+  	NAME portfolio_position_json_test
+  	COMMAND $<TARGET_FILE:portfolio_position_json_test>
 )
