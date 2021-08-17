@@ -45,6 +45,10 @@ add_executable(order_response_json_test "")
 target_sources(order_response_json_test PRIVATE order_response_json_test.cpp ../src/OrderResponse.cpp)
 target_link_libraries(order_response_json_test PRIVATE gtest_main)
 
+add_executable(order_book_json_test "")
+target_sources(order_book_json_test PRIVATE order_book_json_test.cpp ../src/OrderBook.cpp ../src/utils.cpp ../src/OrderResponse.cpp)
+target_link_libraries(order_book_json_test PRIVATE gtest_main)
+
 enable_testing()
 
 add_test(
@@ -85,4 +89,9 @@ add_test(
 add_test(
   	NAME order_response_json_test
   	COMMAND $<TARGET_FILE:order_response_json_test>
+)
+
+add_test(
+  	NAME order_book_json_test
+  	COMMAND $<TARGET_FILE:order_book_json_test>
 )

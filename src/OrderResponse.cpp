@@ -21,5 +21,5 @@ void from_json(const Json& j, OrderResponse& orderResponse) {
 }
 
 bool operator==(const OrderResponse& lhs, const OrderResponse& rhs) {
-
+    return lhs.price == rhs.price && lhs.quantity == rhs.quantity;
 }
