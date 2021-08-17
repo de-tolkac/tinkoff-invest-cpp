@@ -61,6 +61,10 @@ add_executable(sandbox_account_json_test "")
 target_sources(sandbox_account_json_test PRIVATE sandbox_account_json_test.cpp ../src/SandboxAccount.cpp ../src/utils.cpp)
 target_link_libraries(sandbox_account_json_test PRIVATE gtest_main)
 
+add_executable(search_market_instrument_json_test "")
+target_sources(search_market_instrument_json_test PRIVATE search_market_instrument_json_test.cpp ../src/SearchMarketInstrument.cpp ../src/utils.cpp)
+target_link_libraries(search_market_instrument_json_test PRIVATE gtest_main)
+
 enable_testing()
 
 add_test(
@@ -121,4 +125,9 @@ add_test(
 add_test(
   	NAME sandbox_account_json_test
   	COMMAND $<TARGET_FILE:sandbox_account_json_test>
+)
+
+add_test(
+  	NAME search_market_instrument_json_test
+  	COMMAND $<TARGET_FILE:search_market_instrument_json_test>
 )
