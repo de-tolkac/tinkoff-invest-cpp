@@ -37,8 +37,6 @@ int main() {
     if (err) {
         std::cout << "Error 4: " << err.message << std::endl;
     }
-
-    std::cout << orders.size() << std::endl;
     
     err = sandboxRest.Remove(account.brokerAccountId);
     if (err) {
