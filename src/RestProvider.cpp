@@ -6,7 +6,7 @@
 #include <cpr/cpr.h> 
 
 #include <string>
-#include <iostream>
+//#include <iostream>
 
 using Json = nlohmann::json;
 
@@ -17,6 +17,41 @@ RestProvider::RestProvider(char* _token)
 RestProvider::RestProvider(std::string& _token)
     : token(_token)
 {}
+
+template<typename T>
+void RestProvider::handleStatusCode500(std::pair<T, Error>& result, std::string& response) {
+    try {
+        Json json = Json::parse(response);
+        
+        result.second.message = json.at("payload").at("message");
+        result.second.code = json.at("payload").at("code");
+    }
+    catch(std::string error) {
+        result.second.message = error;
+        result.second.code = "Error";
+    }
+    catch(...) {
+        result.second.message = "Invalid Response";
+        result.second.code = "Error";
+    }
+}
+
+void RestProvider::handleStatusCode500(Error& result, std::string& response) {
+    try {
+        Json json = Json::parse(response);
+        
+        result.message = json.at("payload").at("message");
+        result.code = json.at("payload").at("code");
+    }
+    catch(std::string error) {
+        result.message = error;
+        result.code = "Error";
+    }
+    catch(...) {
+        result.message = "Invalid Response";
+        result.code = "Error";
+    }
+}
 
 // Orders
 std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std::string& id) {
@@ -33,30 +68,24 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
                                       cpr::VerifySsl{false});
 
     if (response.status_code == 200) {
-        Json json = Json::parse(response.text);
+        try {
+            Json json = Json::parse(response.text);
 
-        for (auto& o : json["payload"]) {
-            try {
-                Order order = o.get<Order>();
-                result.first.push_back(order);
-            } catch (std::string error) {
-                result.first.clear();
-                
-                result.second.message = error;
-                result.second.code = "Error";
-
-                return result;
-            }
+            result.first = json.at("payload").get<std::vector<Order>>();
+            result.second.code = "Ok";
         }
-
-        result.second.code = "Ok";
+        catch(std::string error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response";
+            result.second.code = "Error";
+        }
 
         return result;
     } else if (response.status_code == 500) {
-        Json json = Json::parse(response.text);
-        
-        result.second.message = json["payload"]["message"];
-        result.second.code = json["payload"]["code"];
+        handleStatusCode500(result, response.text);
 
         return result;
     }
@@ -85,43 +114,36 @@ std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::st
     body += "\", \"price\": ";
     body += std::to_string(price);
     body += "}";
-    
-    std::cout << token <<  std::endl;
-    std::cout << body << std::endl;
-    std::cout << url << std::endl;
 
     cpr::Response response = cpr::Post(cpr::Url{url},
                                       cpr::Body{body},
                                       cpr::Bearer{token},
                                       cpr::VerifySsl{false});
 
-    std::cout << response.text << std::endl;
     
     if (response.status_code == 200) {
         try {
             Json json = Json::parse(response.text);
 
-            result.first = json["payload"].get<PlacedOrder>();
+            result.first = json.at("payload").get<PlacedOrder>();
+            result.second.code = "Ok";
         }
         catch(std::string error) {
             result.second.message = error;
             result.second.code = "Error";
-
-            return result;
         }
         catch(...) {
             result.second.message = "Invalid Response. It is impossible to parse JSON";
             result.second.code = "Error";
-
-            return result;
         }
 
+        return result;
     } else if (response.status_code == 500) {
-
+        handleStatusCode500(result, response.text);
+        
+        return result;
     }
 
-    std::cout << response.status_code << std::endl;
-    std::cout << response.text << std::endl;
     result.second.message = "Invalid response";
     result.second.code = "Error";
 

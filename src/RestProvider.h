@@ -21,6 +21,11 @@
 
 class RestProvider {
     std::string token;
+private:
+    template<typename T>
+    void handleStatusCode500(std::pair<T, Error>&, std::string&);
+
+    void handleStatusCode500(Error&, std::string&);
 protected:
     RestProvider() = delete;
     RestProvider(std::string&);
