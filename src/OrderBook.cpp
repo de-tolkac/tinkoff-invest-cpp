@@ -63,7 +63,7 @@ void from_json(const Json& j, OrderBook& orderBook) {
             orderBook.limitDown = j["limitDown"].get<double>();
         }
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     }
     catch(...) {

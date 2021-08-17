@@ -46,7 +46,7 @@ void from_json(const Json& j, SearchMarketInstrument& instrument) {
             instrument.currency = toCurrency(j["currency"]);
         }
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     }
     catch(...) {

@@ -26,7 +26,7 @@ void RestProvider::handleStatusCode500(std::pair<T, Error>& result, std::string&
         result.second.message = json.at("payload").at("message");
         result.second.code = json.at("payload").at("code");
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         result.second.message = error;
         result.second.code = "Error";
     }
@@ -43,7 +43,7 @@ void RestProvider::handleStatusCode500(Error& result, std::string& response) {
         result.message = json.at("payload").at("message");
         result.code = json.at("payload").at("code");
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         result.message = error;
         result.code = "Error";
     }
@@ -74,7 +74,7 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
             result.first = json.at("payload").get<std::vector<Order>>();
             result.second.code = "Ok";
         }
-        catch(std::string error) {
+        catch(std::string& error) {
             result.second.message = error;
             result.second.code = "Error";
         }
@@ -128,7 +128,7 @@ std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::st
             result.first = json.at("payload").get<PlacedOrder>();
             result.second.code = "Ok";
         }
-        catch(std::string error) {
+        catch(std::string& error) {
             result.second.message = error;
             result.second.code = "Error";
         }

@@ -24,7 +24,7 @@ void from_json(const Json& j, CurrencyPosition& c) {
             c.blocked = j["blocked"].get<double>();
         }
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;   
     }
     catch(...) {

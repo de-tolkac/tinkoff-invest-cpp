@@ -63,7 +63,7 @@ void from_json(const Json& j, PortfolioPosition& position) {
         }
 
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     }
     catch(...) {

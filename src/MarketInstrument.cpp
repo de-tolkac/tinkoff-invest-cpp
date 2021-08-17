@@ -53,7 +53,7 @@ void from_json(const Json& j, MarketInstrument& instr) {
             instr.currency = toCurrency(j.at("currency"));
         }
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     }
     catch(...) {

@@ -97,7 +97,7 @@ void from_json(const Json& j, Operation& operation) {
             operation.operationType = toOperationTypeWithCommission(j["operationType"]);
         }
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     }
     catch(...) {

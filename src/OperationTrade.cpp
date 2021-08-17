@@ -24,8 +24,8 @@ void from_json(const Json& j, OperationTrade& op) {
         
         op.date = toDate(j.at("date"));
     }
-    catch(std::string error) {
-
+    catch(std::string& error) {
+        throw error;
     }
     catch(...) {
         std::string message = "Impossible to parse JSON to OperationTrade structure";

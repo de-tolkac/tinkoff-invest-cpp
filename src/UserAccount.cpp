@@ -26,7 +26,7 @@ void from_json(const Json& j, UserAccount& account) {
 
         account.brokerAccountType = toBrokerAccountType(j.at("brokerAccountType"));
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     }
     catch(...) {

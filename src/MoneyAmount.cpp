@@ -17,7 +17,7 @@ void from_json(const Json& j, MoneyAmount& m) {
         m.currency = toCurrency(j.at("currency"));
         j.at("value").get_to(m.value);
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     }
     catch(...) {

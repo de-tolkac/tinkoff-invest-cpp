@@ -27,7 +27,7 @@ void from_json(const Json& j, Order& order) {
         order.status = toOrderStatus(j.at("status"));
         order.type = toOrderType(j.at("type"));
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     } 
     catch(...) {

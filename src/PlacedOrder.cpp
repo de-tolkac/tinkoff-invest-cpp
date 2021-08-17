@@ -45,7 +45,7 @@ void from_json(const Json& j, PlacedOrder& order) {
             order.commission = j["commission"].get<MoneyAmount>();
         }
     } 
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;
     } 
     catch(...) {

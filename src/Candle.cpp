@@ -36,7 +36,7 @@ void from_json(const Json& j, Candle& candle) {
 
         candle.time = toDate(j.at("time"));
     }
-    catch(std::string error) {
+    catch(std::string& error) {
         throw error;   
     }
     catch(...) {        
