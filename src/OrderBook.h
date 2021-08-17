@@ -5,6 +5,11 @@
 
 #include <string>
 #include <vector>
+#include <optional>
+
+#include <nlohmann/json.hpp>
+
+using Json = nlohmann::json;
 
 struct OrderBook {
     std::string figi;
@@ -17,9 +22,15 @@ struct OrderBook {
     TradeStatus tradeStatus;
 
     double minPriceIncrement;
-    double faceValue;
-    double lastPrice;
-    double closePrice;
-    double limitUp;
-    double limitDown;    
+
+    std::optional<double> faceValue;
+    std::optional<double> lastPrice;
+    std::optional<double> closePrice;
+    std::optional<double> limitUp;
+    std::optional<double> limitDown;    
 };
+
+void to_json(Json&, const OrderBook&);
+void from_json(const Json&, OrderBook&);
+
+bool operator==(const OrderBook&, const OrderBook&);
