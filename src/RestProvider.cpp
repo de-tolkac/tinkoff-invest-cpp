@@ -67,11 +67,68 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
     return result;
 }
 
-std::pair<PlacedLimitOrder, Error> RestProvider::LimitOrder(const char* url, std::string& id, std::string& figi, int lots, OperationType operation, double price) {
+std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::string id, std::string figi, int lots, OperationType operation, double price) {
+    std::pair<PlacedOrder, Error> result;
 
+    std::string url = _url;
+    url += "?figi=";
+    url += figi;
+    if (id.length()) {
+        url += "&brokerAccountId=";
+        url += id;
+    }
+
+    std::string body = "{\"lots\": ";
+    body += std::to_string(lots);
+    body += ", \"operation\": \"";
+    body += toString(operation);
+    body += "\", \"price\": ";
+    body += std::to_string(price);
+    body += "}";
+    
+    std::cout << token <<  std::endl;
+    std::cout << body << std::endl;
+    std::cout << url << std::endl;
+
+    cpr::Response response = cpr::Post(cpr::Url{url},
+                                      cpr::Body{body},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
+    std::cout << response.text << std::endl;
+    
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json["payload"].get<PlacedOrder>();
+        }
+        catch(std::string error) {
+            result.second.message = error;
+            result.second.code = "Error";
+
+            return result;
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+
+            return result;
+        }
+
+    } else if (response.status_code == 500) {
+
+    }
+
+    std::cout << response.status_code << std::endl;
+    std::cout << response.text << std::endl;
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
-std::pair<PlacedMarketOrder, Error> RestProvider::MarketOrder(const char* url, std::string& id, std::string& figi, int lots, OperationType operation) {
+std::pair<PlacedOrder, Error> RestProvider::MarketOrder(const char* url, std::string& id, std::string& figi, int lots, OperationType operation) {
 }
 
 Error RestProvider::OrderCancel(const char* url, std::string& id, std::string& orderId) {

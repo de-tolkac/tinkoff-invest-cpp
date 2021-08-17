@@ -2,8 +2,7 @@
 
 #include <Order.h>
 #include <OperationType.h>
-#include <PlacedLimitOrder.h>
-#include <PlacedMarketOrder.h>
+#include <PlacedOrder.h>
 #include <PortfolioPosition.h>
 #include <CurrencyPosition.h>
 #include <Portfolio.h>
@@ -29,8 +28,8 @@ protected:
 
     // Orders
     std::pair<std::vector<Order>, Error> Orders(const char*, std::string&);
-    std::pair<PlacedLimitOrder, Error> LimitOrder(const char*, std::string&, std::string&, int, OperationType, double);
-    std::pair<PlacedMarketOrder, Error> MarketOrder(const char*, std::string&, std::string&, int, OperationType);
+    std::pair<PlacedOrder, Error> LimitOrder(const char*, std::string, std::string, int, OperationType, double);
+    std::pair<PlacedOrder, Error> MarketOrder(const char*, std::string&, std::string&, int, OperationType);
     Error OrderCancel(const char*, std::string&, std::string&);
 
     // Portfolio

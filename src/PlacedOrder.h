@@ -12,7 +12,7 @@
 using Json = nlohmann::json;
 
 
-struct PlacedLimitOrder {
+struct PlacedOrder {
     std::string orderId;
 
     OperationType operation;
@@ -26,7 +26,7 @@ struct PlacedLimitOrder {
     std::optional<MoneyAmount> commission;
 };
 
-void to_json(Json&, const PlacedLimitOrder&);
-void from_json(const Json&, PlacedLimitOrder&);
+void to_json(Json&, const PlacedOrder&);
+void from_json(const Json&, PlacedOrder&);
 
-bool operator==(const PlacedLimitOrder&, const PlacedLimitOrder&);
+bool operator==(const PlacedOrder&, const PlacedOrder&);

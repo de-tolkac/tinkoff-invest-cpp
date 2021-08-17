@@ -141,11 +141,11 @@ std::pair<std::vector<Order>, Error> SandboxRestClient::Orders(std::string& id) 
     return RestProvider::Orders(URL::Sandbox::Orders, id);
 }
 
-std::pair<PlacedLimitOrder, Error> SandboxRestClient::LimitOrder(std::string& id, std::string& figi, int lots, OperationType operation, double price) {
+std::pair<PlacedOrder, Error> SandboxRestClient::LimitOrder(std::string id, std::string figi, int lots, OperationType operation, double price) {
     return RestProvider::LimitOrder(URL::Sandbox::OrdersLimitOrder, id, figi, lots, operation, price);
 }
 
-std::pair<PlacedMarketOrder, Error> SandboxRestClient::MarketOrder(std::string& id, std::string& figi, int lots, OperationType operation) {
+std::pair<PlacedOrder, Error> SandboxRestClient::MarketOrder(std::string& id, std::string& figi, int lots, OperationType operation) {
     return RestProvider::MarketOrder(URL::Sandbox::OrdersMarketOrder, id, figi, lots, operation);
 }
 

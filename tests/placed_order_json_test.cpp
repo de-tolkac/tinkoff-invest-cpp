@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
-#include <PlacedLimitOrder.h>
+#include <PlacedOrder.h>
 
 #include <nlohmann/json.hpp>
 
 using Json = nlohmann::json;
 
-TEST(json_test, PlacedLimitOrder_get) {
+TEST(json_test, PlacedOrder_get) {
     Json j = R"(
         {
             "orderId": "testOrder",
@@ -23,7 +23,7 @@ TEST(json_test, PlacedLimitOrder_get) {
         }
     )"_json;
 
-    PlacedLimitOrder order1;
+    PlacedOrder order1;
     order1.orderId = "testOrder";
     order1.operation = OperationType::Buy;
     order1.status = OrderStatus::New;
@@ -33,12 +33,12 @@ TEST(json_test, PlacedLimitOrder_get) {
     order1.executedLots = 200;
     order1.commission = {Currency::RUB, 100};
 
-    PlacedLimitOrder order2 = j.get<PlacedLimitOrder>();
+    PlacedOrder order2 = j.get<PlacedOrder>();
 
     ASSERT_EQ(order1, order2);
 }
 
-TEST(json_test, PlacedLimitOrder_Parse) {
+TEST(json_test, PlacedOrder_Parse) {
     std::string text = R"(
         {
             "orderId": "testOrder",
@@ -55,7 +55,7 @@ TEST(json_test, PlacedLimitOrder_Parse) {
         }
     )";
 
-    PlacedLimitOrder order1;
+    PlacedOrder order1;
     order1.orderId = "testOrder";
     order1.operation = OperationType::Buy;
     order1.status = OrderStatus::New;
@@ -65,7 +65,7 @@ TEST(json_test, PlacedLimitOrder_Parse) {
     order1.executedLots = 200;
     order1.commission = {Currency::RUB, 100};
 
-    PlacedLimitOrder order2 = Json::parse(text);
+    PlacedOrder order2 = Json::parse(text);
 
     ASSERT_EQ(order1, order2);
 }

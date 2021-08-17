@@ -20,7 +20,7 @@ set(
     ./src/RestClient.cpp 
     ./src/RestProvider.cpp 
     ./src/Order.cpp 
-    ./src/PlacedLimitOrder.cpp 
+    ./src/PlacedOrder.cpp 
     ./src/MoneyAmount.cpp 
     ./src/Candle.cpp
     ./src/CurrencyPosition.cpp

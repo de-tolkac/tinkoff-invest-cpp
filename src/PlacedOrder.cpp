@@ -1,8 +1,8 @@
-#include <PlacedLimitOrder.h>
+#include <PlacedOrder.h>
 
 #include <utils.h>
 
-void to_json(Json& j, const PlacedLimitOrder& order) {
+void to_json(Json& j, const PlacedOrder& order) {
     j = Json {
                 {"oderId", order.orderId},
                 {"operation", toString(order.operation)},
@@ -24,7 +24,7 @@ void to_json(Json& j, const PlacedLimitOrder& order) {
     }
 }
 
-void from_json(const Json& j, PlacedLimitOrder& order) {
+void from_json(const Json& j, PlacedOrder& order) {
     try {
         j.at("orderId").get_to(order.orderId);
         j.at("requestedLots").get_to(order.requestedLots);
@@ -55,7 +55,7 @@ void from_json(const Json& j, PlacedLimitOrder& order) {
 }
 
 
-bool operator==(const PlacedLimitOrder& lhs, const PlacedLimitOrder& rhs) {
+bool operator==(const PlacedOrder& lhs, const PlacedOrder& rhs) {
     return  lhs.orderId == rhs.orderId && lhs.operation == rhs.operation &&
             lhs.status == rhs.status && lhs.requestedLots == rhs.requestedLots &&
             lhs.executedLots == rhs.executedLots && lhs.rejectReason == rhs.rejectReason &&

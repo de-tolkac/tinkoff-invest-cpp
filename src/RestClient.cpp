@@ -6,11 +6,11 @@ std::pair<std::vector<Order>, Error> RestClient::Orders(std::string& id) {
     return RestProvider::Orders(URL::Production::Orders, id);
 }
 
-std::pair<PlacedLimitOrder, Error> RestClient::LimitOrder(std::string& id, std::string& figi, int lots, OperationType operation, double price) {
+std::pair<PlacedOrder, Error> RestClient::LimitOrder(std::string& id, std::string& figi, int lots, OperationType operation, double price) {
     return RestProvider::LimitOrder(URL::Production::OrdersLimitOrder, id, figi, lots, operation, price);
 }
 
-std::pair<PlacedMarketOrder, Error> RestClient::MarketOrder(std::string& id, std::string& figi, int lots, OperationType operation) {
+std::pair<PlacedOrder, Error> RestClient::MarketOrder(std::string& id, std::string& figi, int lots, OperationType operation) {
     return RestProvider::MarketOrder(URL::Production::OrdersMarketOrder, id, figi, lots, operation);
 }
 

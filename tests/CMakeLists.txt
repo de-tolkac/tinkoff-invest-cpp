@@ -49,9 +49,9 @@ add_executable(order_book_json_test "")
 target_sources(order_book_json_test PRIVATE order_book_json_test.cpp ../src/OrderBook.cpp ../src/utils.cpp ../src/OrderResponse.cpp)
 target_link_libraries(order_book_json_test PRIVATE gtest_main)
 
-add_executable(placed_limit_order_json_test "")
-target_sources(placed_limit_order_json_test PRIVATE placed_limit_order_json_test.cpp ../src/PlacedLimitOrder.cpp ../src/utils.cpp ../src/MoneyAmount.cpp)
-target_link_libraries(placed_limit_order_json_test PRIVATE gtest_main)
+add_executable(placed_order_json_test "")
+target_sources(placed_order_json_test PRIVATE placed_order_json_test.cpp ../src/PlacedOrder.cpp ../src/utils.cpp ../src/MoneyAmount.cpp)
+target_link_libraries(placed_order_json_test PRIVATE gtest_main)
 
 enable_testing()
 
@@ -101,6 +101,6 @@ add_test(
 )
 
 add_test(
-  	NAME placed_limit_order_json_test
-  	COMMAND $<TARGET_FILE:placed_limit_order_json_test>
+  	NAME placed_order_json_test
+  	COMMAND $<TARGET_FILE:placed_order_json_test>
 )
