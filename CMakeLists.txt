@@ -29,6 +29,7 @@ set(
     ./src/OperationTrade.cpp
     ./src/OrderBook.cpp
     ./src/OrderResponse.cpp
+    ./src/PortfolioPosition.cpp
 )
 
 add_library(tinvest SHARED ${SOURCE_FILES})
