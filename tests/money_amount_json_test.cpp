@@ -39,3 +39,23 @@ TEST(json_test, MoneyAmount_Parse) {
 
     ASSERT_EQ(amount1, amount2);
 }
+
+TEST(json_test, MoneyAmount_Exception_currency) {
+    Json j = R"(
+        {
+            "value": 250000.19
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<MoneyAmount>(), std::string);
+}
+
+TEST(json_test, MoneyAmount_Exception_value) {
+    Json j = R"(
+        {
+            "currency": "USD"
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<MoneyAmount>(), std::string);
+}
