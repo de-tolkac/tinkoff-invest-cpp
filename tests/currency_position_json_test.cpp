@@ -47,18 +47,18 @@ TEST(json_test, CurrencyPosition_Parse) {
 }
 
 TEST(json_test, CurrencyPosition_Missed_Blocked) {
-    std::string text = R"(
+    Json j = R"(
         {
             "currency": "RUB",
             "balance": 1000.25
         }
-    )";
+    )"_json;
 
     CurrencyPosition curPosition1;
     curPosition1.currency = Currency::RUB;
     curPosition1.balance = 1000.25;
 
-    CurrencyPosition curPosition2 = Json::parse(text);
+    CurrencyPosition curPosition2 = j.get<CurrencyPosition>();
 
     ASSERT_EQ(curPosition1, curPosition2);
 }
