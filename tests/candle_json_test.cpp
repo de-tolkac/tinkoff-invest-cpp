@@ -54,7 +54,18 @@ TEST(json_test, Candle_Parse) {
     strptime(timeBuffer, "%Y-%m-%dT%H:%M:%S%c%c%c:%c%c", &time);
     candle1.time = timegm(&time);
 
-    std::string text = "{\"figi\":\"testFigi123456789\",\"interval\":\"1min\",\"o\":10.0,\"c\":20.1,\"h\":30.2,\"l\":40.3,\"v\":50.4,\"time\":\"2019-08-19T18:38:33+03:00\"}";
+    std::string text = R"(
+        {
+            "figi": "testFigi123456789",
+            "interval": "1min",
+            "o": 10.0,
+            "c": 20.1,
+            "h": 30.2,
+            "l": 40.3,
+            "v": 50.4,
+            "time": "2019-08-19T18:38:33+03:00"
+        }
+    )";
     Candle candle2 = Json::parse(text);
 
     ASSERT_EQ(candle1, candle2); 
