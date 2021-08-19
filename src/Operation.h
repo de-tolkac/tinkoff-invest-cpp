@@ -38,6 +38,8 @@ struct Operation {
     std::optional<std::string> figi;
     std::optional<InstrumentType> instrumentType;
     std::optional<OperationTypeWithCommission> operationType;
+
+    Operation();
 };
 
 void to_json(Json&, const Operation&);

@@ -2,6 +2,10 @@
 
 #include <utils.h>
 
+Operation::Operation() 
+    : trades()
+{}
+
 void to_json(Json& j, const Operation& operation) {
     try {
         j = Json {
