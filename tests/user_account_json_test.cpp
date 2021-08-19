@@ -39,3 +39,23 @@ TEST(json_test, UserAccount_Parse) {
 
     ASSERT_EQ(account1, account2);
 }
+
+TEST(json_test, UserAccount_Exception_brokerAccountType) {
+    Json j = R"(
+        {
+            "brokerAccountId": "testID"
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<UserAccount>(), std::string);
+}
+
+TEST(json_test, UserAccount_Exception_brokerAccountId) {
+    Json j = R"(
+        {
+            "brokerAccountType": "Tinkoff"
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<UserAccount>(), std::string);
+}
