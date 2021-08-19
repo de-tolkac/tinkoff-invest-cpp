@@ -63,3 +63,131 @@ TEST(json_test, Order_Parse) {
 
     ASSERT_EQ(order1, order2);
 }
+
+TEST(json_test, Order_Exception_orderId) {
+    Json j = R"(
+        {
+            "figi": "testFIGI123",
+            "operation": "Buy",
+            "status": "New",
+            "requestedLots": 10,
+            "executedLots": 255,
+            "type": "Limit",
+            "price": 1000.2
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
+
+TEST(json_test, Order_Exception_figi) {
+    Json j = R"(
+        {
+            "orderId": "testId",
+            "operation": "Buy",
+            "status": "New",
+            "requestedLots": 10,
+            "executedLots": 255,
+            "type": "Limit",
+            "price": 1000.2
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
+
+TEST(json_test, Order_Exception_operation) {
+    Json j = R"(
+        {
+            "orderId": "testId",
+            "figi": "testFIGI123",
+            "status": "New",
+            "requestedLots": 10,
+            "executedLots": 255,
+            "type": "Limit",
+            "price": 1000.2
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
+
+TEST(json_test, Order_Exception_status) {
+    Json j = R"(
+        {
+            "orderId": "testId",
+            "figi": "testFIGI123",
+            "operation": "Buy",
+            "requestedLots": 10,
+            "executedLots": 255,
+            "type": "Limit",
+            "price": 1000.2
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
+
+TEST(json_test, Order_Exception_requestedLots) {
+    Json j = R"(
+        {
+            "orderId": "testId",
+            "figi": "testFIGI123",
+            "operation": "Buy",
+            "status": "New",
+            "executedLots": 255,
+            "type": "Limit",
+            "price": 1000.2
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
+
+TEST(json_test, Order_Exception_executedLots) {
+    Json j = R"(
+        {
+            "orderId": "testId",
+            "figi": "testFIGI123",
+            "operation": "Buy",
+            "status": "New",
+            "requestedLots": 10,
+            "type": "Limit",
+            "price": 1000.2
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
+
+TEST(json_test, Order_Exception_type) {
+    Json j = R"(
+        {
+            "orderId": "testId",
+            "figi": "testFIGI123",
+            "operation": "Buy",
+            "status": "New",
+            "requestedLots": 10,
+            "executedLots": 255,
+            "price": 1000.2
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
+
+TEST(json_test, Order_Exception_price) {
+    Json j = R"(
+        {
+            "orderId": "testId",
+            "figi": "testFIGI123",
+            "operation": "Buy",
+            "status": "New",
+            "requestedLots": 10,
+            "executedLots": 255,
+            "type": "Limit"
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<Order>(), std::string);
+}
