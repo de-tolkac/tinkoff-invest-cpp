@@ -39,3 +39,23 @@ TEST(json_test, SandboxAccount_Parse) {
 
     ASSERT_EQ(account1, account2);
 }
+
+TEST(json_test, SandboxAccount_Exception_brokerAccountType) {
+    Json j = R"(
+        {
+            "brokerAccountId": "testID"
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<SandboxAccount>(), std::string);
+}
+
+TEST(json_test, SandboxAccount_Exception_brokerAccountId) {
+    Json j = R"(
+        {
+            "brokerAccountType": "Tinkoff"
+        }
+    )"_json;
+
+    ASSERT_THROW(j.get<SandboxAccount>(), std::string);
+}
