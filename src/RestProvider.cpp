@@ -216,17 +216,130 @@ Error RestProvider::OrderCancel(const char* _url, std::string& id, std::string& 
                                       cpr::Bearer{token},
                                       cpr::VerifySsl{false});
 
+    if (response.status_code == 200) {
+        result.code = "Ok";
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.message = "Invalid response";
+    result.code = "Error";
+
+    return result;
 }
 
 
 // Portfolio
 std::pair<PortfolioInfo, Error> RestProvider::Portfolio(const char* url1, const char* url2, std::string& id) {
+    std::pair<PortfolioInfo, Error> result;
+
+    auto [positions, err1] = RestProvider::PortfolioPositions(url1, id);
+    if (err1) {
+        result.second = err1;
+
+        return result;
+    }
+
+    auto [currencies, err2] = RestProvider::PortfolioCurrencies(url2, id);
+    if (err2) {
+        result.second = err2;
+
+        return result;
+    }
+
+    result.first.positions = positions;
+    result.first.currencies = currencies;
+    result.second.code = "Ok";
+
+    return result;
 }
 
-std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPositions(const char* url, std::string& id) {
+std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPositions(const char* _url, std::string& id) {
+    std::pair<std::vector<PortfolioPosition>, Error> result;
+
+    std::string url = _url;
+    if (id.length()) {
+        url += "?brokerAccountId=";
+        url += id;
+    }
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("positions").get<std::vector<PortfolioPosition>>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
-std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencies(const char* url, std::string& id) {
+std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencies(const char* _url, std::string& id) {
+    std::pair<std::vector<CurrencyPosition>, Error> result;
+
+    std::string url = _url;
+    if (id.length()) {
+        url += "?brokerAccountId=";
+        url += id;
+    }
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("currencies").get<std::vector<CurrencyPosition>>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
 
