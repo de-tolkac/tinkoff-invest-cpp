@@ -19,7 +19,7 @@ RestProvider::RestProvider(std::string& _token)
 {}
 
 template<typename T>
-void RestProvider::handleStatusCode500(std::pair<T, Error>& result, std::string& response) {
+void RestProvider::handleStatusCode500(std::pair<T, Error>& result, std::string& response) const {
     try {
         Json json = Json::parse(response);
         
@@ -36,7 +36,7 @@ void RestProvider::handleStatusCode500(std::pair<T, Error>& result, std::string&
     }
 }
 
-void RestProvider::handleStatusCode500(Error& result, std::string& response) {
+void RestProvider::handleStatusCode500(Error& result, std::string& response) const {
     try {
         Json json = Json::parse(response);
         
@@ -54,7 +54,7 @@ void RestProvider::handleStatusCode500(Error& result, std::string& response) {
 }
 
 // Orders
-std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std::string& id) {
+std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std::string& id) const {
     std::pair<std::vector<Order>, Error> result;
 
     std::string url = _url;
@@ -96,7 +96,7 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
     return result;
 }
 
-std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::string& id, std::string& figi, int lots, OperationType operation, double price) {
+std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::string& id, std::string& figi, int lots, OperationType operation, double price) const {
     std::pair<PlacedOrder, Error> result;
 
     std::string url = _url;
@@ -149,7 +149,7 @@ std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::st
     return result;
 }
 
-std::pair<PlacedOrder, Error> RestProvider::MarketOrder(const char* _url, std::string& id, std::string& figi, int lots, OperationType operation) {
+std::pair<PlacedOrder, Error> RestProvider::MarketOrder(const char* _url, std::string& id, std::string& figi, int lots, OperationType operation) const {
     std::pair<PlacedOrder, Error> result;
 
     std::string url = _url;
@@ -201,7 +201,7 @@ std::pair<PlacedOrder, Error> RestProvider::MarketOrder(const char* _url, std::s
     return result;
 }
 
-Error RestProvider::OrderCancel(const char* _url, std::string& id, std::string& orderId) {
+Error RestProvider::OrderCancel(const char* _url, std::string& id, std::string& orderId) const {
     Error result;
 
     std::string url = _url;
@@ -234,7 +234,7 @@ Error RestProvider::OrderCancel(const char* _url, std::string& id, std::string& 
 
 
 // Portfolio
-std::pair<PortfolioInfo, Error> RestProvider::Portfolio(const char* url1, const char* url2, std::string& id) {
+std::pair<PortfolioInfo, Error> RestProvider::Portfolio(const char* url1, const char* url2, std::string& id) const {
     std::pair<PortfolioInfo, Error> result;
 
     auto [positions, err1] = RestProvider::PortfolioPositions(url1, id);
@@ -258,7 +258,7 @@ std::pair<PortfolioInfo, Error> RestProvider::Portfolio(const char* url1, const 
     return result;
 }
 
-std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPositions(const char* _url, std::string& id) {
+std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPositions(const char* _url, std::string& id) const {
     std::pair<std::vector<PortfolioPosition>, Error> result;
 
     std::string url = _url;
@@ -300,7 +300,7 @@ std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPosition
     return result;
 }
 
-std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencies(const char* _url, std::string& id) {
+std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencies(const char* _url, std::string& id) const {
     std::pair<std::vector<CurrencyPosition>, Error> result;
 
     std::string url = _url;
@@ -344,36 +344,36 @@ std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencie
 
 
 // Market
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::Stocks(const char* url) {
+std::pair<std::vector<MarketInstrument>, Error> RestProvider::Stocks(const char* url) const {
 }
 
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::Bonds(const char* url) {
+std::pair<std::vector<MarketInstrument>, Error> RestProvider::Bonds(const char* url) const {
 }
 
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::ETFs(const char* url) {
+std::pair<std::vector<MarketInstrument>, Error> RestProvider::ETFs(const char* url) const {
 }
 
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::Currencies(const char* url) {
+std::pair<std::vector<MarketInstrument>, Error> RestProvider::Currencies(const char* url) const {
 }
 
-std::pair<OrderBook, Error> RestProvider::Orderbook(const char* url, std::string& figi, int depth) {
+std::pair<OrderBook, Error> RestProvider::Orderbook(const char* url, std::string& figi, int depth) const {
 }
 
-std::pair<std::vector<Candle>, Error> RestProvider::Candles(const char* url, std::string& figi, time_t& from, time_t& to, CandleInterval& interval) {
+std::pair<std::vector<Candle>, Error> RestProvider::Candles(const char* url, std::string& figi, time_t& from, time_t& to, CandleInterval& interval) const {
 }
 
-std::pair<SearchMarketInstrument, Error> RestProvider::GetIntsrumentByFIGI(const char* url, std::string& figi) {
+std::pair<SearchMarketInstrument, Error> RestProvider::GetIntsrumentByFIGI(const char* url, std::string& figi) const {
 }
 
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::GetInstrumentByTicker(const char* url, std::string& ticker) {
+std::pair<std::vector<MarketInstrument>, Error> RestProvider::GetInstrumentByTicker(const char* url, std::string& ticker) const {
 }
 
 
 // Operations
-std::pair<std::vector<Operation>, Error> RestProvider::Operations(const char* url, std::string& id, std::string& figi, time_t& from, time_t& to) {
+std::pair<std::vector<Operation>, Error> RestProvider::Operations(const char* url, std::string& id, std::string& figi, time_t& from, time_t& to) const {
 }
 
 
 // User
-std::pair<std::vector<UserAccount>, Error> RestProvider::Accounts(const char* url) {
+std::pair<std::vector<UserAccount>, Error> RestProvider::Accounts(const char* url) const {
 }
