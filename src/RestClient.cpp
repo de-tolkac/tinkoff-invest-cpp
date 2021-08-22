@@ -61,6 +61,10 @@ std::pair<CandleList, Error> RestClient::Candles(std::string& figi, time_t& from
     return RestProvider::Candles(URL::Production::MarketCandles, figi, from_str, to_str, interval);
 }
 
+std::pair<CandleList, Error> RestClient::Candles(std::string& figi, std::string from, std::string to, CandleInterval& interval) const {
+    return RestProvider::Candles(URL::Production::MarketCandles, figi, from, to, interval);
+}
+
 std::pair<SearchMarketInstrument, Error> RestClient::GetIntsrumentByFIGI(std::string& figi) const {
     return RestProvider::GetIntsrumentByFIGI(URL::Production::MarketSearchByFigi, figi);
 }
@@ -72,7 +76,9 @@ std::pair<MarketInstrumentList, Error> RestClient::GetInstrumentByTicker(std::st
 
 // Operations
 std::pair<OperationList, Error> RestClient::Operations(std::string& id, std::string& figi, time_t& from, time_t& to) const {
-    return RestProvider::Operations(URL::Production::Operations, id, figi, from, to);
+    std::string from_str = toString(from);
+    std::string to_str = toString(to);
+    return RestProvider::Operations(URL::Production::Operations, id, figi, from_str, to_str);
 }
 
 

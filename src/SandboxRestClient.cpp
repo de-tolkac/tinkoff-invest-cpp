@@ -324,6 +324,12 @@ std::pair<MarketInstrumentList, Error> SandboxRestClient::GetInstrumentByTicker(
 
 // Operations
 std::pair<OperationList, Error> SandboxRestClient::Operations(std::string id, std::string figi, time_t from, time_t to) const {
+    std::string from_str = toString(from);
+    std::string to_str = toString(to);
+    return RestProvider::Operations(URL::Sandbox::Operations, id, figi, from_str, to_str);
+}
+
+std::pair<OperationList, Error> SandboxRestClient::Operations(std::string id, std::string figi, std::string from, std::string to) const {
     return RestProvider::Operations(URL::Sandbox::Operations, id, figi, from, to);
 }
 

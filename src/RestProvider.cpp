@@ -539,11 +539,87 @@ std::pair<MarketInstrumentList, Error> RestProvider::GetInstrumentByTicker(const
 
 
 // Operations
-std::pair<OperationList, Error> RestProvider::Operations(const char* url, std::string& id, std::string& figi, time_t& from, time_t& to) const {
+std::pair<OperationList, Error> RestProvider::Operations(const char* url, std::string& id, std::string& figi, std::string& from, std::string& to) const {
+    std::pair<OperationList, Error> result;
 
+    cpr::Parameters params{{"from", from}, {"to", to}};
+
+    if (figi.length()) {
+        params.Add({"figi", figi});
+    }
+
+    if (id.length()) {
+        params.Add({"brokerAccountId", id});
+    }
+
+    cpr::Response response = cpr::Get(params,
+                                      cpr::Url{url},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("operations").get<OperationList>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
 
 // User
 std::pair<UserAccountList, Error> RestProvider::Accounts(const char* url) const {
+    std::pair<UserAccountList, Error> result;
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                        cpr::Bearer{token},
+                                        cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("accounts").get<UserAccountList>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }

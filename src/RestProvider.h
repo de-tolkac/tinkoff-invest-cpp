@@ -44,17 +44,13 @@ protected:
 
     // Market
     std::pair<MarketInstrumentList, Error> GetInstruments(const char*) const; 
-    std::pair<MarketInstrumentList, Error> Stocks(const char*) const;
-    std::pair<MarketInstrumentList, Error> Bonds(const char*) const;
-    std::pair<MarketInstrumentList, Error> ETFs(const char*) const;
-    std::pair<MarketInstrumentList, Error> Currencies(const char*) const;
     std::pair<OrderBook, Error> Orderbook(const char*, std::string&, int) const;
     std::pair<CandleList, Error> Candles(const char*, std::string&, std::string&, std::string&, CandleInterval&) const;
     std::pair<SearchMarketInstrument, Error> GetIntsrumentByFIGI(const char*, std::string&) const;
     std::pair<MarketInstrumentList, Error> GetInstrumentByTicker(const char*, std::string&) const;
 
     // Operations
-    std::pair<OperationList, Error> Operations(const char*, std::string&, std::string&, time_t&, time_t&) const;
+    std::pair<OperationList, Error> Operations(const char*, std::string&, std::string&, std::string&, std::string&) const;
 
     // User
     std::pair<UserAccountList, Error> Accounts(const char*) const;

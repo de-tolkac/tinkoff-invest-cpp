@@ -62,6 +62,7 @@ public:
 
     // Operations
     std::pair<OperationList, Error> Operations(std::string, std::string, time_t, time_t) const;
+    std::pair<OperationList, Error> Operations(std::string, std::string, std::string, std::string) const;
 
     // User
     std::pair<UserAccountList, Error> Accounts() const;

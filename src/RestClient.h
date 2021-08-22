@@ -47,6 +47,7 @@ public:
     std::pair<MarketInstrumentList, Error> Currencies() const;
     std::pair<OrderBook, Error> Orderbook(std::string&, int) const;
     std::pair<CandleList, Error> Candles(std::string&, time_t&, time_t&, CandleInterval&) const;
+    std::pair<CandleList, Error> Candles(std::string&, std::string, std::string, CandleInterval&) const;
     std::pair<SearchMarketInstrument, Error> GetIntsrumentByFIGI(std::string&) const;
     std::pair<MarketInstrumentList, Error> GetInstrumentByTicker(std::string&) const;
 
