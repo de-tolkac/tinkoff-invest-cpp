@@ -32,6 +32,7 @@ set(
     ./src/PortfolioPosition.cpp
     ./src/SandboxAccount.cpp
     ./src/SearchMarketInstrument.cpp
+    ./src/UserAccount.cpp
 )
 
 add_library(tinvest SHARED ${SOURCE_FILES})
