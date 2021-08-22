@@ -42,11 +42,50 @@ int main() {
     std::tie(orders, err) = sandboxRest.Orders(account.brokerAccountId);
     if (err) {
         std::cout << "Error 5: " << err.message << std::endl;
+    } else {
+        std::cout << "Orders total: " << orders.size() << std::endl;
+        for (const auto& o : orders) {
+            std::cout << o.figi << ": " << o.requestedLots << "\n";
+        }
+        std::cout << std::endl;
     }
     
-    err = sandboxRest.Remove(account.brokerAccountId);
+    PortfolioPositionList positions;
+    std::tie(positions, err) = sandboxRest.PortfolioPositions(account.brokerAccountId);
     if (err) {
         std::cout << "Error 6: " << err.message << std::endl;
+    } else {
+        std::cout << "Positions total: " << positions.size() << std::endl;
+        for (const auto& p : positions) {
+            std::cout << p.name << ": " << p.lots << "\n";
+        }
+        std::cout << std::endl;
+    }
+
+    CurrencyPositionList currencies;
+    std::tie(currencies, err) = sandboxRest.PortfolioCurrencies(account.brokerAccountId);
+    if (err) {
+        std::cout << "Error 7: " << err.message << std::endl;
+    } else {
+        std::cout << "Currencies total: " << positions.size() << std::endl;
+        for (const auto& c : currencies) {
+            std::cout << c.currency.to_string() << ": " << c.balance << "\n";
+        }
+        std::cout << std::endl;
+    }
+
+    PortfolioInfo portfolio;
+    std::tie(portfolio, err) = sandboxRest.Portfolio(account.brokerAccountId);
+    if (err) {
+        std::cout << "Error 8: " << err.message << std::endl;
+    } else {
+        std::cout << "Positions total: " << portfolio.positions.size() << std::endl;
+        std::cout << "Currencies total: " << portfolio.currencies.size() << std::endl << std::endl;
+    }
+
+    err = sandboxRest.Remove(account.brokerAccountId);
+    if (err) {
+        std::cout << "Error 9: " << err.message << std::endl;
     } else {
         std::cout << "Account " << account.brokerAccountId << " removed\n";
     }
