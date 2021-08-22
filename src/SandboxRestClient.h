@@ -55,12 +55,13 @@ public:
     std::pair<std::vector<MarketInstrument>, Error> ETFs() const;
     std::pair<std::vector<MarketInstrument>, Error> Currencies() const;
     std::pair<OrderBook, Error> Orderbook(std::string, int) const;
-    std::pair<std::vector<Candle>, Error> Candles(std::string, time_t&, time_t&, CandleInterval&) const;
+    std::pair<std::vector<Candle>, Error> Candles(std::string, time_t&, time_t&, CandleInterval) const;
+    std::pair<std::vector<Candle>, Error> Candles(std::string, std::string, std::string, CandleInterval) const;
     std::pair<SearchMarketInstrument, Error> GetIntsrumentByFIGI(std::string) const;
     std::pair<std::vector<MarketInstrument>, Error> GetInstrumentByTicker(std::string) const;
 
     // Operations
-    std::pair<std::vector<Operation>, Error> Operations(std::string, std::string, time_t&, time_t&) const;
+    std::pair<std::vector<Operation>, Error> Operations(std::string, std::string, time_t, time_t) const;
 
     // User
     std::pair<std::vector<UserAccount>, Error> Accounts() const;

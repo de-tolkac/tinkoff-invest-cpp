@@ -304,7 +304,13 @@ std::pair<OrderBook, Error> SandboxRestClient::Orderbook(std::string figi, int d
     return RestProvider::Orderbook(URL::Sandbox::MarketOrderbook, figi, depth);
 }
 
-std::pair<std::vector<Candle>, Error> SandboxRestClient::Candles(std::string figi, time_t& from, time_t& to, CandleInterval& interval) const {
+std::pair<std::vector<Candle>, Error> SandboxRestClient::Candles(std::string figi, time_t& from, time_t& to, CandleInterval interval) const {
+    std::string from_str = toString(from);
+    std::string to_str = toString(to);
+    return RestProvider::Candles(URL::Sandbox::MarketCandles, figi, from_str, to_str, interval);
+}
+
+std::pair<std::vector<Candle>, Error> SandboxRestClient::Candles(std::string figi, std::string from, std::string to, CandleInterval interval) const {
     return RestProvider::Candles(URL::Sandbox::MarketCandles, figi, from, to, interval);
 }
 
@@ -317,7 +323,7 @@ std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::GetInstrument
 }
 
 // Operations
-std::pair<std::vector<Operation>, Error> SandboxRestClient::Operations(std::string id, std::string figi, time_t& from, time_t& to) const {
+std::pair<std::vector<Operation>, Error> SandboxRestClient::Operations(std::string id, std::string figi, time_t from, time_t to) const {
     return RestProvider::Operations(URL::Sandbox::Operations, id, figi, from, to);
 }
 

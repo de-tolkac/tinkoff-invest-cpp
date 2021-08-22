@@ -48,7 +48,7 @@ protected:
     std::pair<std::vector<MarketInstrument>, Error> ETFs(const char*) const;
     std::pair<std::vector<MarketInstrument>, Error> Currencies(const char*) const;
     std::pair<OrderBook, Error> Orderbook(const char*, std::string&, int) const;
-    std::pair<std::vector<Candle>, Error> Candles(const char*, std::string&, time_t&, time_t&, CandleInterval&) const;
+    std::pair<std::vector<Candle>, Error> Candles(const char*, std::string&, std::string&, std::string&, CandleInterval&) const;
     std::pair<SearchMarketInstrument, Error> GetIntsrumentByFIGI(const char*, std::string&) const;
     std::pair<std::vector<MarketInstrument>, Error> GetInstrumentByTicker(const char*, std::string&) const;
 

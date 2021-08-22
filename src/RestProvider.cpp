@@ -54,8 +54,8 @@ void RestProvider::handleStatusCode500(Error& result, std::string& response) con
 }
 
 // Orders
-std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std::string& id) const {
-    std::pair<std::vector<Order>, Error> result;
+std::pair<OrderList, Error> RestProvider::Orders(const char* _url, std::string& id) const {
+    std::pair<OrderList, Error> result;
 
     std::string url = _url;
     if (id.length()) {
@@ -71,7 +71,7 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
         try {
             Json json = Json::parse(response.text);
 
-            result.first = json.at("payload").get<std::vector<Order>>();
+            result.first = json.at("payload").get<OrderList>();
             result.second.code = "Ok";
         }
         catch(std::string& error) {
@@ -258,8 +258,8 @@ std::pair<PortfolioInfo, Error> RestProvider::Portfolio(const char* url1, const 
     return result;
 }
 
-std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPositions(const char* _url, std::string& id) const {
-    std::pair<std::vector<PortfolioPosition>, Error> result;
+std::pair<PortfolioPositionList, Error> RestProvider::PortfolioPositions(const char* _url, std::string& id) const {
+    std::pair<PortfolioPositionList, Error> result;
 
     std::string url = _url;
     if (id.length()) {
@@ -275,7 +275,7 @@ std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPosition
         try {
             Json json = Json::parse(response.text);
 
-            result.first = json.at("payload").at("positions").get<std::vector<PortfolioPosition>>();
+            result.first = json.at("payload").at("positions").get<PortfolioPositionList>();
             result.second.code = "Ok";
         }
         catch(std::string& error) {
@@ -300,8 +300,8 @@ std::pair<std::vector<PortfolioPosition>, Error> RestProvider::PortfolioPosition
     return result;
 }
 
-std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencies(const char* _url, std::string& id) const {
-    std::pair<std::vector<CurrencyPosition>, Error> result;
+std::pair<CurrencyPositionList, Error> RestProvider::PortfolioCurrencies(const char* _url, std::string& id) const {
+    std::pair<CurrencyPositionList, Error> result;
 
     std::string url = _url;
     if (id.length()) {
@@ -317,7 +317,7 @@ std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencie
         try {
             Json json = Json::parse(response.text);
 
-            result.first = json.at("payload").at("currencies").get<std::vector<CurrencyPosition>>();
+            result.first = json.at("payload").at("currencies").get<CurrencyPositionList>();
             result.second.code = "Ok";
         }
         catch(std::string& error) {
@@ -344,22 +344,233 @@ std::pair<std::vector<CurrencyPosition>, Error> RestProvider::PortfolioCurrencie
 
 
 // Market
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::Stocks(const char* url) const {
+std::pair<MarketInstrumentList, Error> RestProvider::Stocks(const char* url) const {
+    std::pair<MarketInstrumentList, Error> result;
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                        cpr::Bearer{token},
+                                        cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("instruments").get<MarketInstrumentList>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::Bonds(const char* url) const {
+std::pair<MarketInstrumentList, Error> RestProvider::Bonds(const char* url) const {
+    std::pair<MarketInstrumentList, Error> result;
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                        cpr::Bearer{token},
+                                        cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("instruments").get<MarketInstrumentList>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::ETFs(const char* url) const {
+std::pair<MarketInstrumentList, Error> RestProvider::ETFs(const char* url) const {
+    std::pair<MarketInstrumentList, Error> result;
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                        cpr::Bearer{token},
+                                        cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("instruments").get<MarketInstrumentList>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
-std::pair<std::vector<MarketInstrument>, Error> RestProvider::Currencies(const char* url) const {
+std::pair<MarketInstrumentList, Error> RestProvider::Currencies(const char* url) const {
+    std::pair<MarketInstrumentList, Error> result;
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                        cpr::Bearer{token},
+                                        cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("instruments").get<MarketInstrumentList>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
-std::pair<OrderBook, Error> RestProvider::Orderbook(const char* url, std::string& figi, int depth) const {
+std::pair<OrderBook, Error> RestProvider::Orderbook(const char* _url, std::string& figi, int depth) const {
+    std::pair<OrderBook, Error> result;
+
+    std::string url = _url;
+    url += "?figi=";
+    url += figi;
+    url += "&depth=";
+    url += std::to_string(depth);
+
+    cpr::Response response = cpr::Get(cpr::Url{url},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").get<OrderBook>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
-std::pair<std::vector<Candle>, Error> RestProvider::Candles(const char* url, std::string& figi, time_t& from, time_t& to, CandleInterval& interval) const {
+std::pair<CandleList, Error> RestProvider::Candles(const char* _url, std::string& figi, std::string& from, std::string& to, CandleInterval& interval) const {
+    std::pair<CandleList, Error> result;
+
+    cpr::Response response = cpr::Get(cpr::Parameters{{"figi", figi},
+                                                      {"from", from},
+                                                      {"to", to}, 
+                                                      {"interval", toString(interval)}
+                                                    },
+                                      cpr::Url{_url},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").at("candles").get<CandleList>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    std::cout << response.text << std::endl << response.status_code << std::endl;
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
 }
 
 std::pair<SearchMarketInstrument, Error> RestProvider::GetIntsrumentByFIGI(const char* url, std::string& figi) const {

@@ -1,5 +1,6 @@
 #include <RestClient.h>
 #include <UrlLib.h>
+#include <utils.h>
 
 // Orders
 std::pair<std::vector<Order>, Error> RestClient::Orders(std::string& id) const {
@@ -55,7 +56,9 @@ std::pair<OrderBook, Error> RestClient::Orderbook(std::string& figi, int depth) 
 }
 
 std::pair<std::vector<Candle>, Error> RestClient::Candles(std::string& figi, time_t& from, time_t& to, CandleInterval& interval) const {
-    return RestProvider::Candles(URL::Production::MarketCandles, figi, from, to, interval);
+    std::string from_str = toString(from);
+    std::string to_str = toString(to);
+    return RestProvider::Candles(URL::Production::MarketCandles, figi, from_str, to_str, interval);
 }
 
 std::pair<SearchMarketInstrument, Error> RestClient::GetIntsrumentByFIGI(std::string& figi) const {
