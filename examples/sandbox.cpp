@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <climits>
 
 int main() {
     std::string token;
@@ -25,22 +26,27 @@ int main() {
         std::cout << "Error 2: " << err.message << std::endl;
     }
 
-
     PlacedOrder limitOrder;
     std::tie(limitOrder, err) = sandboxRest.LimitOrder(account.brokerAccountId, "BBG004730N88", 10, OperationType::Buy, 1.0);
     if (err) {
         std::cout << "Error 3: " << err.message << std::endl;
     }
 
+    PlacedOrder marketOrder;
+    std::tie(marketOrder, err) = sandboxRest.MarketOrder(account.brokerAccountId, "BBG004730N88", 10, OperationType::Buy);
+    if (err) {
+        std::cout << "Error 4: " << err.message << " " << err.code << std::endl;
+    }
+
     OrderList orders;
     std::tie(orders, err) = sandboxRest.Orders(account.brokerAccountId);
     if (err) {
-        std::cout << "Error 4: " << err.message << std::endl;
+        std::cout << "Error 5: " << err.message << std::endl;
     }
     
     err = sandboxRest.Remove(account.brokerAccountId);
     if (err) {
-        std::cout << "Error 5: " << err.message << std::endl;
+        std::cout << "Error 6: " << err.message << std::endl;
     } else {
         std::cout << "Account " << account.brokerAccountId << " removed\n";
     }
