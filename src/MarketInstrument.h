@@ -29,3 +29,5 @@ void to_json(Json&, const MarketInstrument&);
 void from_json(const Json&, MarketInstrument&);
 
 bool operator==(const MarketInstrument&, const MarketInstrument&);
+
+using MarketInstrumentList = std::vector<MarketInstrument>;
