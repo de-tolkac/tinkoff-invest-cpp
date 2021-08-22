@@ -27,3 +27,5 @@ void to_json(Json&, const Candle&);
 void from_json(const Json&, Candle&);
 
 bool operator==(const Candle&, const Candle&);
+
+using CandleList = std::vector<Candle>;
