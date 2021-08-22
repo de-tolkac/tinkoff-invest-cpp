@@ -19,3 +19,5 @@ void to_json(Json&, const CurrencyPosition&);
 void from_json(const Json&, CurrencyPosition&);
 
 bool operator==(const CurrencyPosition&, const CurrencyPosition&);
+
+using CurrencyPositionList = std::vector<CurrencyPosition>;

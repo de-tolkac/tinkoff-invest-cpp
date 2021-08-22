@@ -31,4 +31,4 @@ void from_json(const Json&, Order&);
 
 bool operator==(const Order&, const Order&);
 
-typedef std::vector<Order> OrderList;
+using OrderList = std::vector<Order>;

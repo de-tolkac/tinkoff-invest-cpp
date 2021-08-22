@@ -32,3 +32,5 @@ void to_json(Json&, const PortfolioPosition&);
 void from_json(const Json&, PortfolioPosition&);
 
 bool operator==(const PortfolioPosition&, const PortfolioPosition&);
+
+using PortfolioPositionList = std::vector<PortfolioPosition>;
