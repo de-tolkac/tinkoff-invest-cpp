@@ -539,10 +539,11 @@ std::pair<MarketInstrumentList, Error> RestProvider::GetInstrumentByTicker(const
 
 
 // Operations
-std::pair<std::vector<Operation>, Error> RestProvider::Operations(const char* url, std::string& id, std::string& figi, time_t& from, time_t& to) const {
+std::pair<OperationList, Error> RestProvider::Operations(const char* url, std::string& id, std::string& figi, time_t& from, time_t& to) const {
+
 }
 
 
 // User
-std::pair<std::vector<UserAccount>, Error> RestProvider::Accounts(const char* url) const {
+std::pair<UserAccountList, Error> RestProvider::Accounts(const char* url) const {
 }

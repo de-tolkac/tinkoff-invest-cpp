@@ -254,7 +254,7 @@ Error SandboxRestClient::Clear(std::string id) const {
 }
 
 // Orders
-std::pair<std::vector<Order>, Error> SandboxRestClient::Orders(std::string id) const {
+std::pair<OrderList, Error> SandboxRestClient::Orders(std::string id) const {
     return RestProvider::Orders(URL::Sandbox::Orders, id);
 }
 
@@ -275,28 +275,28 @@ std::pair<PortfolioInfo, Error> SandboxRestClient::Portfolio(std::string id) con
     return RestProvider::Portfolio(URL::Sandbox::Portfolio, URL::Sandbox::PortfolioCurrencies, id);
 }
 
-std::pair<std::vector<PortfolioPosition>, Error> SandboxRestClient::PortfolioPositions(std::string id) const {
+std::pair<PortfolioPositionList, Error> SandboxRestClient::PortfolioPositions(std::string id) const {
     return RestProvider::PortfolioPositions(URL::Sandbox::Portfolio, id);
 }
 
-std::pair<std::vector<CurrencyPosition>, Error> SandboxRestClient::PortfolioCurrencies(std::string id) const {
+std::pair<CurrencyPositionList, Error> SandboxRestClient::PortfolioCurrencies(std::string id) const {
     return RestProvider::PortfolioCurrencies(URL::Sandbox::PortfolioCurrencies, id);
 }
 
 // Market
-std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Stocks() const {
+std::pair<MarketInstrumentList, Error> SandboxRestClient::Stocks() const {
     return RestProvider::GetInstruments(URL::Sandbox::MarketStocks);
 }
 
-std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Bonds() const {
+std::pair<MarketInstrumentList, Error> SandboxRestClient::Bonds() const {
     return RestProvider::GetInstruments(URL::Sandbox::MarketBonds);
 }
 
-std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::ETFs() const {
+std::pair<MarketInstrumentList, Error> SandboxRestClient::ETFs() const {
     return RestProvider::GetInstruments(URL::Sandbox::MarketETFs);
 }
 
-std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Currencies() const {
+std::pair<MarketInstrumentList, Error> SandboxRestClient::Currencies() const {
     return RestProvider::GetInstruments(URL::Sandbox::MarketCurrencies);
 }
 
@@ -304,13 +304,13 @@ std::pair<OrderBook, Error> SandboxRestClient::Orderbook(std::string figi, int d
     return RestProvider::Orderbook(URL::Sandbox::MarketOrderbook, figi, depth);
 }
 
-std::pair<std::vector<Candle>, Error> SandboxRestClient::Candles(std::string figi, time_t& from, time_t& to, CandleInterval interval) const {
+std::pair<CandleList, Error> SandboxRestClient::Candles(std::string figi, time_t& from, time_t& to, CandleInterval interval) const {
     std::string from_str = toString(from);
     std::string to_str = toString(to);
     return RestProvider::Candles(URL::Sandbox::MarketCandles, figi, from_str, to_str, interval);
 }
 
-std::pair<std::vector<Candle>, Error> SandboxRestClient::Candles(std::string figi, std::string from, std::string to, CandleInterval interval) const {
+std::pair<CandleList, Error> SandboxRestClient::Candles(std::string figi, std::string from, std::string to, CandleInterval interval) const {
     return RestProvider::Candles(URL::Sandbox::MarketCandles, figi, from, to, interval);
 }
 
@@ -318,16 +318,16 @@ std::pair<SearchMarketInstrument, Error> SandboxRestClient::GetIntsrumentByFIGI(
     return RestProvider::GetIntsrumentByFIGI(URL::Sandbox::MarketSearchByFigi, figi);
 }
 
-std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::GetInstrumentByTicker(std::string ticker) const {
+std::pair<MarketInstrumentList, Error> SandboxRestClient::GetInstrumentByTicker(std::string ticker) const {
     return RestProvider::GetInstrumentByTicker(URL::Sandbox::MarketSearchByTicker, ticker);
 }
 
 // Operations
-std::pair<std::vector<Operation>, Error> SandboxRestClient::Operations(std::string id, std::string figi, time_t from, time_t to) const {
+std::pair<OperationList, Error> SandboxRestClient::Operations(std::string id, std::string figi, time_t from, time_t to) const {
     return RestProvider::Operations(URL::Sandbox::Operations, id, figi, from, to);
 }
 
 // User
-std::pair<std::vector<UserAccount>, Error> SandboxRestClient::Accounts() const {
+std::pair<UserAccountList, Error> SandboxRestClient::Accounts() const {
     return RestProvider::Accounts(URL::Sandbox::UserAccounts);
 }

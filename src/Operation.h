@@ -46,3 +46,5 @@ void to_json(Json&, const Operation&);
 void from_json(const Json&, Operation&);
 
 bool operator==(const Operation&, const Operation&);
+
+using OperationList = std::vector<Operation>;

@@ -32,30 +32,30 @@ protected:
     RestProvider(char*);
 
     // Orders
-    std::pair<std::vector<Order>, Error> Orders(const char*, std::string&) const;
+    std::pair<OrderList, Error> Orders(const char*, std::string&) const;
     std::pair<PlacedOrder, Error> LimitOrder(const char*, std::string&, std::string&, int, OperationType, double) const;
     std::pair<PlacedOrder, Error> MarketOrder(const char*, std::string&, std::string&, int, OperationType) const;
     Error OrderCancel(const char*, std::string&, std::string&) const;
 
     // Portfolio
     std::pair<PortfolioInfo, Error> Portfolio(const char*, const char*, std::string&) const;
-    std::pair<std::vector<PortfolioPosition>, Error> PortfolioPositions(const char*, std::string&) const;
-    std::pair<std::vector<CurrencyPosition>, Error> PortfolioCurrencies(const char*, std::string&) const;
+    std::pair<PortfolioPositionList, Error> PortfolioPositions(const char*, std::string&) const;
+    std::pair<CurrencyPositionList, Error> PortfolioCurrencies(const char*, std::string&) const;
 
     // Market
     std::pair<MarketInstrumentList, Error> GetInstruments(const char*) const; 
-    std::pair<std::vector<MarketInstrument>, Error> Stocks(const char*) const;
-    std::pair<std::vector<MarketInstrument>, Error> Bonds(const char*) const;
-    std::pair<std::vector<MarketInstrument>, Error> ETFs(const char*) const;
-    std::pair<std::vector<MarketInstrument>, Error> Currencies(const char*) const;
+    std::pair<MarketInstrumentList, Error> Stocks(const char*) const;
+    std::pair<MarketInstrumentList, Error> Bonds(const char*) const;
+    std::pair<MarketInstrumentList, Error> ETFs(const char*) const;
+    std::pair<MarketInstrumentList, Error> Currencies(const char*) const;
     std::pair<OrderBook, Error> Orderbook(const char*, std::string&, int) const;
-    std::pair<std::vector<Candle>, Error> Candles(const char*, std::string&, std::string&, std::string&, CandleInterval&) const;
+    std::pair<CandleList, Error> Candles(const char*, std::string&, std::string&, std::string&, CandleInterval&) const;
     std::pair<SearchMarketInstrument, Error> GetIntsrumentByFIGI(const char*, std::string&) const;
-    std::pair<std::vector<MarketInstrument>, Error> GetInstrumentByTicker(const char*, std::string&) const;
+    std::pair<MarketInstrumentList, Error> GetInstrumentByTicker(const char*, std::string&) const;
 
     // Operations
-    std::pair<std::vector<Operation>, Error> Operations(const char*, std::string&, std::string&, time_t&, time_t&) const;
+    std::pair<OperationList, Error> Operations(const char*, std::string&, std::string&, time_t&, time_t&) const;
 
     // User
-    std::pair<std::vector<UserAccount>, Error> Accounts(const char*) const;
+    std::pair<UserAccountList, Error> Accounts(const char*) const;
 };

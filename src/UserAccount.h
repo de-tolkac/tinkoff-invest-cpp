@@ -32,3 +32,5 @@ void to_json(Json&, const UserAccount&);
 void from_json(const Json&, UserAccount&);
 
 bool operator==(const UserAccount&, const UserAccount&);
+
+using UserAccountList = std::vector<UserAccount>;
