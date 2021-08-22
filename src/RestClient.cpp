@@ -36,19 +36,19 @@ std::pair<std::vector<CurrencyPosition>, Error> RestClient::PortfolioCurrencies(
 
 // Market
 std::pair<std::vector<MarketInstrument>, Error> RestClient::Stocks() const {
-    return RestProvider::Stocks(URL::Production::MarketStocks);
+    return RestProvider::GetInstruments(URL::Production::MarketStocks);
 }
 
 std::pair<std::vector<MarketInstrument>, Error> RestClient::Bonds() const {
-    return RestProvider::Bonds(URL::Production::MarketBonds);
+    return RestProvider::GetInstruments(URL::Production::MarketBonds);
 }
 
 std::pair<std::vector<MarketInstrument>, Error> RestClient::ETFs() const {
-    return RestProvider::ETFs(URL::Production::MarketETFs);
+    return RestProvider::GetInstruments(URL::Production::MarketETFs);
 }
 
 std::pair<std::vector<MarketInstrument>, Error> RestClient::Currencies() const {
-    return RestProvider::Currencies(URL::Production::MarketCurrencies);
+    return RestProvider::GetInstruments(URL::Production::MarketCurrencies);
 }
 
 std::pair<OrderBook, Error> RestClient::Orderbook(std::string& figi, int depth) const {

@@ -285,19 +285,19 @@ std::pair<std::vector<CurrencyPosition>, Error> SandboxRestClient::PortfolioCurr
 
 // Market
 std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Stocks() const {
-    return RestProvider::Stocks(URL::Sandbox::MarketStocks);
+    return RestProvider::GetInstruments(URL::Sandbox::MarketStocks);
 }
 
 std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Bonds() const {
-    return RestProvider::Bonds(URL::Sandbox::MarketBonds);
+    return RestProvider::GetInstruments(URL::Sandbox::MarketBonds);
 }
 
 std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::ETFs() const {
-    return RestProvider::ETFs(URL::Sandbox::MarketETFs);
+    return RestProvider::GetInstruments(URL::Sandbox::MarketETFs);
 }
 
 std::pair<std::vector<MarketInstrument>, Error> SandboxRestClient::Currencies() const {
-    return RestProvider::Currencies(URL::Sandbox::MarketCurrencies);
+    return RestProvider::GetInstruments(URL::Sandbox::MarketCurrencies);
 }
 
 std::pair<OrderBook, Error> SandboxRestClient::Orderbook(std::string figi, int depth) const {

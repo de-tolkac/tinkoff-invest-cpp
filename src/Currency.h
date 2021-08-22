@@ -75,6 +75,8 @@ public:
             return "TRY";
             break;
         }
+        
+        return "";
     }
 private:
     CurrencyType value;

@@ -43,6 +43,7 @@ protected:
     std::pair<std::vector<CurrencyPosition>, Error> PortfolioCurrencies(const char*, std::string&) const;
 
     // Market
+    std::pair<MarketInstrumentList, Error> GetInstruments(const char*) const; 
     std::pair<std::vector<MarketInstrument>, Error> Stocks(const char*) const;
     std::pair<std::vector<MarketInstrument>, Error> Bonds(const char*) const;
     std::pair<std::vector<MarketInstrument>, Error> ETFs(const char*) const;
