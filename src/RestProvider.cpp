@@ -96,7 +96,7 @@ std::pair<std::vector<Order>, Error> RestProvider::Orders(const char* _url, std:
     return result;
 }
 
-std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::string id, std::string figi, int lots, OperationType operation, double price) {
+std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::string& id, std::string& figi, int lots, OperationType operation, double price) {
     std::pair<PlacedOrder, Error> result;
 
     std::string url = _url;
@@ -114,6 +114,57 @@ std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::st
     body += "\", \"price\": ";
     body += std::to_string(price);
     body += "}";
+
+    cpr::Response response = cpr::Post(cpr::Url{url},
+                                      cpr::Body{body},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
+    if (response.status_code == 200) {
+        try {
+            Json json = Json::parse(response.text);
+
+            result.first = json.at("payload").get<PlacedOrder>();
+            result.second.code = "Ok";
+        }
+        catch(std::string& error) {
+            result.second.message = error;
+            result.second.code = "Error";
+        }
+        catch(...) {
+            result.second.message = "Invalid Response. It is impossible to parse JSON";
+            result.second.code = "Error";
+        }
+
+        return result;
+    } else if (response.status_code == 500) {
+        handleStatusCode500(result, response.text);
+        
+        return result;
+    }
+
+    result.second.message = "Invalid response";
+    result.second.code = "Error";
+
+    return result;
+}
+
+std::pair<PlacedOrder, Error> RestProvider::MarketOrder(const char* _url, std::string& id, std::string& figi, int lots, OperationType operation) {
+    std::pair<PlacedOrder, Error> result;
+
+    std::string url = _url;
+    url += "?figi=";
+    url += figi;
+    if (id.length()) {
+        url += "&brokerAccountId=";
+        url += id;
+    }
+
+    std::string body = "{\"lots\": ";
+    body += std::to_string(lots);
+    body += ", \"operation\": \"";
+    body += toString(operation);
+    body += "\"}";
 
     cpr::Response response = cpr::Post(cpr::Url{url},
                                       cpr::Body{body},
@@ -150,10 +201,21 @@ std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* _url, std::st
     return result;
 }
 
-std::pair<PlacedOrder, Error> RestProvider::MarketOrder(const char* url, std::string& id, std::string& figi, int lots, OperationType operation) {
-}
+Error RestProvider::OrderCancel(const char* _url, std::string& id, std::string& orderId) {
+    Error result;
 
-Error RestProvider::OrderCancel(const char* url, std::string& id, std::string& orderId) {
+    std::string url = _url;
+    url += "?orderId=";
+    url += orderId;
+    if (id.length()) {
+        url += "&brokerAccountId=";
+        url += id;
+    }
+
+    cpr::Response response = cpr::Post(cpr::Url{url},
+                                      cpr::Bearer{token},
+                                      cpr::VerifySsl{false});
+
 }
 
 
