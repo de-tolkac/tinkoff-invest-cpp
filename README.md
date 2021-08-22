@@ -16,17 +16,17 @@ Documentation in progress...
 * :heavy_check_mark: portfolio
     * :heavy_check_mark: /portfolio **\[GET\]**
     * :heavy_check_mark: /portfolio/currencies **\[GET\]**
-* :x: market
-    * :x: /market/stocks **\[GET\]**
-    * :x: /market/bonds **\[GET\]**
-    * :x: /market/etfs **\[GET\]**
-    * :x: /market/currencies **\[GET\]**
-    * :x: /market/orderbook **\[GET\]**
-    * :x: /market/candles **\[GET\]**
-    * :x: /market/search/by-figi **\[GET\]**
-    * :x: /market/search/by-ticker **\[GET\]**
-* :x: operations
-    * :x: /operations **\[GET\]**
-* :x: user
-    * :x: /user/account **\[GET\]**
+* :heavy_check_mark: market
+    * :heavy_check_mark: /market/stocks **\[GET\]**
+    * :heavy_check_mark: /market/bonds **\[GET\]**
+    * :heavy_check_mark: /market/etfs **\[GET\]**
+    * :heavy_check_mark: /market/currencies **\[GET\]**
+    * :heavy_check_mark: /market/orderbook **\[GET\]**
+    * :heavy_check_mark: /market/candles **\[GET\]**
+    * :heavy_check_mark: /market/search/by-figi **\[GET\]**
+    * :heavy_check_mark: /market/search/by-ticker **\[GET\]**
+* :heavy_check_mark: operations
+    * :heavy_check_mark: /operations **\[GET\]**
+* :heavy_check_mark: user
+    * :heavy_check_mark: /user/account **\[GET\]**
 * :x: streaming
