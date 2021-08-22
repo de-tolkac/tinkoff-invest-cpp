@@ -8,14 +8,14 @@ Documentation in progress...
     * :heavy_check_mark: /sandbox/positions/balance **\[POST\]**
     * :heavy_check_mark: /sandbox/remove **\[POST\]**
     * :heavy_check_mark: /sandbox/clear **\[POST\]**
-* :clock130: orders
+* :heavy_check_mark: orders
     * :heavy_check_mark: /orders **\[GET\]**
     * :heavy_check_mark: /orders/limit-order **\[POST\]**
-    * :x: /orders/market-order **\[POST\]**
-    * :x: /orders/cancel **\[POST\]**
-* :x: portfolio
-    * :x: /portfolio **\[GET\]**
-    * :x: /portfolio/currencies **\[GET\]**
+    * :heavy_check_mark: /orders/market-order **\[POST\]**
+    * :heavy_check_mark: /orders/cancel **\[POST\]**
+* :heavy_check_mark: portfolio
+    * :heavy_check_mark: /portfolio **\[GET\]**
+    * :heavy_check_mark: /portfolio/currencies **\[GET\]**
 * :x: market
     * :x: /market/stocks **\[GET\]**
     * :x: /market/bonds **\[GET\]**
