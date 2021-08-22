@@ -32,9 +32,18 @@ public:
         return value == currency.value; 
     }
 
+    constexpr bool operator==(CurrencyType currency) const {
+        return value == currency; 
+    }
+
     constexpr bool operator!=(Currency currency) const { 
         return value != currency.value; 
     }
+
+    constexpr bool operator!=(CurrencyType currency) const { 
+        return value != currency; 
+    }
+
 
     std::string to_string() const {
         switch (value) {
