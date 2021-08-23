@@ -107,7 +107,7 @@ int main() {
     } else {
         std::cout << "Currencies total: " << currencies.size() << std::endl;
         for (const auto& c : currencies) {
-            std::cout << c.currency.to_string() << ": " << c.balance << "\n";
+            std::cout << to_string(c.currency) << ": " << c.balance << "\n";
         }
         std::cout << std::endl;
     }
@@ -170,7 +170,7 @@ int main() {
     if (err) {
         std::cout << "Error 15: " << err.message << std::endl;
     } else {
-        std::cout << orderBook.figi << ": " << orderBook.tradeStatus.to_string() << std::endl << std::endl;
+        std::cout << orderBook.figi << ": " << to_string(orderBook.tradeStatus) << std::endl << std::endl;
     }
 
 

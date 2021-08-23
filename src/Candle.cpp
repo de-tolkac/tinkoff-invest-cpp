@@ -7,7 +7,7 @@
 void to_json(Json& j, const Candle& candle) {
     j = Json {
                 {"figi", candle.figi},
-                {"interval", candle.interval.to_string()},
+                {"interval", to_string(candle.interval)},
                 {"o", candle.openPrice},
                 {"c", candle.closePrice},
                 {"h", candle.highPrice},

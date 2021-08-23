@@ -10,8 +10,8 @@ void to_json(Json& j, const Operation& operation) {
     try {
         j = Json {
                     {"id", operation.id},
-                    {"status", operation.status.to_string()},
-                    {"currency", operation.currency.to_string()},
+                    {"status", to_string(operation.status)},
+                    {"currency", to_string(operation.currency)},
                     {"payment", std::to_string(operation.payment)},
                     {"isMarginCall", std::to_string(operation.isMarginCall)},
                     {"date", toString(operation.date)},
@@ -42,11 +42,11 @@ void to_json(Json& j, const Operation& operation) {
         }
 
         if (operation.instrumentType) {
-            j.push_back({"trades", (*operation.instrumentType).to_string()});
+            j.push_back({"trades", to_string(*operation.instrumentType)});
         }
 
         if (operation.operationType) {
-            j.push_back({"operationType", (*operation.operationType).to_string()});
+            j.push_back({"operationType", to_string(*operation.operationType)});
         }
     }
     catch(...) {

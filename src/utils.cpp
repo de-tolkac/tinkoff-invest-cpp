@@ -1,86 +1,15 @@
 #include <utils.h>
 
-std::string toString(const Currency& c) {
-    switch (c) {
-    case Currency::RUB:
-        return "RUB";
-        break;
-    case Currency::USD:
-        return "USD";
-        break;
-    case Currency::EUR:
-        return "EUR";
-        break;
-    case Currency::GBP:
-        return "GBP";
-        break;
-    case Currency::HKD:
-        return "HKD";
-        break;
-    case Currency::CHF:
-        return "CHF";
-        break;
-    case Currency::JPY:
-        return "JPY";
-        break;
-    case Currency::CNY:
-        return "CNY";
-        break;
-    case Currency::TRY:
-        return "TRY";
-        break;
-    }
-}
-
-std::string toString(const BrokerAccountType& t) {
-    if (t == BrokerAccountType::Tinkoff) {
+std::string to_string(BrokerAccountType type) {
+    if (type == BrokerAccountType::Tinkoff) {
         return "Tinkoff";
     }
+
     return "TinkoffIis";
 }
 
-std::string toString(const OrderStatus& s) {
-    switch (s) {
-    case OrderStatus::New:
-        return "New";
-        break;
-    case OrderStatus::PartiallyFill:
-        return "PartiallyFill";
-        break;
-    case OrderStatus::Fill:
-        return "Fill";
-        break;
-    case OrderStatus::Cancelled:
-        return "Cancelled";
-        break;
-    case OrderStatus::Replaced:
-        return "Replaced";
-        break;
-    case OrderStatus::PendingCancel:
-        return "PendingCancel";
-        break;
-    case OrderStatus::Rejected:
-        return "Rejected";
-        break;
-    case OrderStatus::PendingReplace:
-        return "PendingReplace";
-        break;
-    case OrderStatus::PendingNew:
-        return "PendingNew";
-        break;
-    }
-}
-
-std::string toString(const OrderType& t) {
-    if (t == OrderType::Limit) {
-        return "Limit";
-    }
-
-    return "Market";
-}
-
-std::string toString(const CandleInterval& i) {
-    switch (i) {
+std::string to_string(CandleInterval interval) {
+    switch (interval) {
     case CandleInterval::_1min:
         return "1min";
         break;
@@ -115,10 +44,46 @@ std::string toString(const CandleInterval& i) {
         return "month";
         break;
     }
+
+    return "";
 }
 
-std::string toString(const InstrumentType& i) {
-    switch (i) {
+std::string to_string(Currency currency) {
+    switch (currency) {
+    case Currency::RUB:
+        return "RUB";
+        break;
+    case Currency::USD:
+        return "USD";
+        break;
+    case Currency::EUR:
+        return "EUR";
+        break;
+    case Currency::GBP:
+        return "GBP";
+        break;
+    case Currency::HKD:
+        return "HKD";
+        break;
+    case Currency::CHF:
+        return "CHF";
+        break;
+    case Currency::JPY:
+        return "JPY";
+        break;
+    case Currency::CNY:
+        return "CNY";
+        break;
+    case Currency::TRY:
+        return "TRY";
+        break;
+    }
+    
+    return "";
+}
+
+std::string to_string(InstrumentType type) {
+    switch (type) {
     case InstrumentType::Stock:
         return "Stock";
         break;
@@ -132,10 +97,12 @@ std::string toString(const InstrumentType& i) {
         return "Etf";
         break;
     }
+
+    return "";
 }
 
-std::string toString(const OperationStatus& o) {
-    switch (o) {
+std::string to_string(OperationStatus status) {
+    switch (status) {
     case OperationStatus::Done:
         return "Done";
         break;
@@ -146,37 +113,20 @@ std::string toString(const OperationStatus& o) {
         return "Progress";
         break;
     }
+    
+    return "";
 }
 
-std::string toString(const OperationType& o) {
-    if (o == OperationType::Buy) {
+std::string to_string(OperationType type) {
+    if (type == OperationType::Buy) {
         return "Buy";
-    } 
-
+    }
+    
     return "Sell";
 }
 
-std::string toString(const TradeStatus& s) {
-    if (s == TradeStatus::NormalTrading) {
-        return "NormalTrading";
-    }
-
-    return "NotAvailableForTrading";
-}
-
-std::string toString(const time_t& time) {
-    char timeBuffer[26];
-    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S%z", gmtime(&time));
-    timeBuffer[25] = '\0';
-    timeBuffer[24] = timeBuffer[23];
-    timeBuffer[23] = timeBuffer[22];
-    timeBuffer[22] = ':';
-
-    return timeBuffer;
-}
-
-std::string toString(const OperationTypeWithCommission& o) {
-    switch (o) {
+std::string to_string(OperationTypeWithCommission type) {
+    switch (type) {
     case OperationTypeWithCommission::Buy:
         return "Buy";
         break;
@@ -241,7 +191,71 @@ std::string toString(const OperationTypeWithCommission& o) {
         return "SecurityOut";
         break;
     }
+
+    return "";
 }
+
+ std::string to_string(OrderStatus status) {
+    switch (status) {
+    case OrderStatus::New:
+        return "New";
+        break;
+    case OrderStatus::PartiallyFill:
+        return "PartiallyFill";
+        break;
+    case OrderStatus::Fill:
+        return "Fill";
+        break;
+    case OrderStatus::Cancelled:
+        return "Cancelled";
+        break;
+    case OrderStatus::Replaced:
+        return "Replaced";
+        break;
+    case OrderStatus::PendingCancel:
+        return "PendingCancel";
+        break;
+    case OrderStatus::Rejected:
+        return "Rejected";
+        break;
+    case OrderStatus::PendingReplace:
+        return "PendingReplace";
+        break;
+    case OrderStatus::PendingNew:
+        return "PendingNew";
+        break;
+    }
+
+    return "";
+}
+
+std::string to_string(OrderType type) {
+    if (type == OrderType::Limit) {
+        return "Limit";
+    }
+
+    return "Market";
+}
+
+std::string to_string(TradeStatus status) {
+    if (status == TradeStatus::NormalTrading) {
+        return "NormalTrading";
+    }
+
+    return "NotAvailableForTrading";
+}
+
+std::string toString(const time_t& time) {
+    char timeBuffer[26];
+    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S%z", gmtime(&time));
+    timeBuffer[25] = '\0';
+    timeBuffer[24] = timeBuffer[23];
+    timeBuffer[23] = timeBuffer[22];
+    timeBuffer[22] = ':';
+
+    return timeBuffer;
+}
+
 
 Currency toCurrency(std::string&& c) {
     if (c == "RUB") {

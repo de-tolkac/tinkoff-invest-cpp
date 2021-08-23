@@ -25,7 +25,7 @@ std::pair<SandboxAccount, Error> SandboxRestClient::Register(BrokerAccountType t
     std::pair<SandboxAccount, Error> result;
 
     cpr::Response response = cpr::Post(cpr::Url{URL::Sandbox::Register},
-                               cpr::Body{"{\"brokerAccountType\": \"" + toString(t) + "\"}"},
+                               cpr::Body{"{\"brokerAccountType\": \"" + to_string(t) + "\"}"},
                                cpr::Bearer{token},
                                cpr::VerifySsl{false});
     
@@ -81,7 +81,7 @@ Error SandboxRestClient::SetCurrencyBalance(std::string id, Currency cur, double
     }
 
     std::string body = "{\"currency\": \"";
-    body += toString(cur);
+    body += to_string(cur);
     body += "\", \"balance\": ";
     body += std::to_string(val);
     body += "}";

@@ -5,8 +5,8 @@
 void to_json(Json& j, const PlacedOrder& order) {
     j = Json {
                 {"oderId", order.orderId},
-                {"operation", order.operation.to_string()},
-                {"status", order.status.to_string()},
+                {"operation", to_string(order.operation)},
+                {"status", to_string(order.status)},
                 {"requestedLots", std::to_string(order.requestedLots)},
                 {"executedLots", std::to_string(order.executedLots)},
             };

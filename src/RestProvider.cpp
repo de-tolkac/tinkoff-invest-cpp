@@ -30,7 +30,7 @@ std::pair<PlacedOrder, Error> RestProvider::LimitOrder(const char* url, std::str
     std::string body = "{\"lots\": ";
     body += std::to_string(lots);
     body += ", \"operation\": \"";
-    body += toString(operation);
+    body += to_string(operation);
     body += "\", \"price\": ";
     body += std::to_string(price);
     body += "}";
@@ -47,7 +47,7 @@ std::pair<PlacedOrder, Error> RestProvider::MarketOrder(const char* url, std::st
     std::string body = "{\"lots\": ";
     body += std::to_string(lots);
     body += ", \"operation\": \"";
-    body += toString(operation);
+    body += to_string(operation);
     body += "\"}";
 
     cpr::Parameters params{{"figi", figi}};
@@ -122,7 +122,7 @@ std::pair<OrderBook, Error> RestProvider::Orderbook(const char* url, std::string
 }
 
 std::pair<CandleList, Error> RestProvider::Candles(const char* url, std::string& figi, std::string& from, std::string& to, CandleInterval& interval) const {
-    cpr::Parameters params{{"figi", figi}, {"from", from}, {"to", to},{"interval", toString(interval)}};
+    cpr::Parameters params{{"figi", figi}, {"from", from}, {"to", to},{"interval", to_string(interval)}};
     
     return handleGetRequest<CandleList>(url, "candles", token, params);
 }

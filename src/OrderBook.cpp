@@ -8,7 +8,7 @@ void to_json(Json& j, const OrderBook& orderBook) {
                 {"depth", std::to_string(orderBook.depth)},
                 {"bids", orderBook.bids},
                 {"asks", orderBook.asks},
-                {"tradeStatus", orderBook.tradeStatus.to_string()},
+                {"tradeStatus", to_string(orderBook.tradeStatus)},
                 {"minPriceIncrement", std::to_string(orderBook.minPriceIncrement)}
              };
 

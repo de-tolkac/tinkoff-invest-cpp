@@ -15,7 +15,7 @@ UserAccount::UserAccount(std::pair<UserAccount, Error>&& t) {
 
 void to_json(Json& j, const UserAccount& account) {
     j = Json {
-                {"brokerAccountType", account.brokerAccountType.to_string()},
+                {"brokerAccountType", to_string(account.brokerAccountType)},
                 {"brokerAccountId", account.brokerAccountId}
              };
 }

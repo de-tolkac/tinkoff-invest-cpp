@@ -9,7 +9,7 @@ void to_json(Json& j, const SearchMarketInstrument& instrument) {
                 {"ticker", instrument.ticker},
                 {"name", instrument.name},
                 {"lot", std::to_string(instrument.lot)},
-                {"type", instrument.type.to_string()}
+                {"type", to_string(instrument.type)}
              };
 
     if (instrument.isin) {
@@ -21,7 +21,7 @@ void to_json(Json& j, const SearchMarketInstrument& instrument) {
     }
 
     if (instrument.currency) {
-        j.push_back({"currency", (*instrument.currency).to_string()});
+        j.push_back({"currency", to_string(*instrument.currency)});
     }
 }
 
