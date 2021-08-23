@@ -12,17 +12,17 @@ enum class Currency {
 
 class Currency {
 public:
-    enum CurrencyType {
+    enum CurrencyEnum {
         RUB, USD, EUR, GBP, HKD, CHF, JPY, CNY, TRY
     };
     
     Currency() = default;
 
-    constexpr Currency(CurrencyType type)
+    constexpr Currency(CurrencyEnum type)
         : value(type)
     {}
 
-    operator CurrencyType() const {
+    operator CurrencyEnum() const {
         return value; 
     } 
 
@@ -32,7 +32,7 @@ public:
         return value == currency.value; 
     }
 
-    constexpr bool operator==(CurrencyType currency) const {
+    constexpr bool operator==(CurrencyEnum currency) const {
         return value == currency; 
     }
 
@@ -40,7 +40,7 @@ public:
         return value != currency.value; 
     }
 
-    constexpr bool operator!=(CurrencyType currency) const { 
+    constexpr bool operator!=(CurrencyEnum currency) const { 
         return value != currency; 
     }
 
@@ -79,5 +79,5 @@ public:
         return "";
     }
 private:
-    CurrencyType value;
+    CurrencyEnum value;
 };
