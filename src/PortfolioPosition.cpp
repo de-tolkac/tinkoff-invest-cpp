@@ -7,7 +7,7 @@ void to_json(Json& j, const PortfolioPosition& position) {
                 {"figi", position.figi},
                 {"ticker", position.ticker},
                 {"name", position.name},
-                {"instrumentType", toString(position.instrumentType)},
+                {"instrumentType", position.instrumentType.to_string()},
                 {"balance", std::to_string(position.balance)},
                 {"lots", std::to_string(position.lots)}
             };

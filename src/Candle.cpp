@@ -5,22 +5,15 @@
 #include <ctime>
 
 void to_json(Json& j, const Candle& candle) {
-    char timeBuffer[26];
-    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S%z", gmtime(&candle.time));
-    timeBuffer[25] = '\0';
-    timeBuffer[24] = timeBuffer[23];
-    timeBuffer[23] = timeBuffer[22];
-    timeBuffer[22] = ':';
-
     j = Json {
                 {"figi", candle.figi},
-                {"interval", toString(candle.interval)},
+                {"interval", candle.interval.to_string()},
                 {"o", candle.openPrice},
                 {"c", candle.closePrice},
                 {"h", candle.highPrice},
                 {"l", candle.lowPrice},
                 {"v", candle.volume},
-                {"time", timeBuffer}
+                {"time", toString(candle.time)}
              };
 }
 

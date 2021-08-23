@@ -7,7 +7,7 @@
 
 void to_json(Json& j, const MoneyAmount& m) {
     j = Json {
-                {"currency", toString(m.currency)},
+                {"currency", m.currency.to_string()},
                 {"value", std::to_string(m.value)}
              };
 }

@@ -8,7 +8,7 @@ void to_json(Json& j, const MarketInstrument& instr) {
                 {"ticker", instr.ticker},
                 {"lot", std::to_string(instr.lot)},
                 {"name", instr.name},
-                {"type", toString(instr.type)}
+                {"type", instr.type.to_string()}
              };
 
     if (instr.isin) {
@@ -24,7 +24,7 @@ void to_json(Json& j, const MarketInstrument& instr) {
     }
 
     if (instr.currency) {
-        j.push_back({"minQuantity", toString(*instr.currency)});
+        j.push_back({"minQuantity", (*instr.currency).to_string()});
     }
 }
 

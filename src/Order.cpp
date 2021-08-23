@@ -6,11 +6,11 @@ void to_json(Json& j, const Order& order) {
     j = Json {
                 {"orderId", order.orderId},
                 {"figi", order.figi},
-                {"operation", toString(order.operation)},
-                {"status", toString(order.status)},
+                {"operation", order.operation.to_string()},
+                {"status", order.status.to_string()},
                 {"requestedLots", std::to_string(order.requestedLots)},
                 {"executedLots", std::to_string(order.executedLots)},
-                {"type", toString(order.type)},
+                {"type", order.type.to_string()},
                 {"price", std::to_string(order.price)}
              };
 }

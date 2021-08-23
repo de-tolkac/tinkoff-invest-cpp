@@ -24,7 +24,7 @@ SandboxAccount& SandboxAccount::operator=(std::pair<SandboxAccount, Error>&& t) 
 
 void to_json(Json& j, const SandboxAccount& account) {
     j = Json {
-                {"brokerAccountType", toString(account.brokerAccountType)},
+                {"brokerAccountType", account.brokerAccountType.to_string()},
                 {"brokerAccountId", account.brokerAccountId}
              };
 }
