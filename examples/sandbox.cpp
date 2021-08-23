@@ -31,14 +31,14 @@ int main() {
 
 
     // Выставление баланса по валютным позициям [SANDBOX]
-    err = sandboxRest.SetCurrencyBalance(account.brokerAccountId, Currency::RUB, 250000);
+    err = sandboxRest.SetCurrencyBalance(account.brokerAccountId, Currency::USD, 250000);
     if (err) {
         std::cout << "Error 3: " << err.message << std::endl;
     }
 
 
     // Выставление баланса по инструментным позициям [SANDBOX]
-    err = sandboxRest.SetPositionsBalance(account.brokerAccountId, "BBG004730N88", 10000);
+    err = sandboxRest.SetPositionsBalance(account.brokerAccountId, "BBG005DXJS36", 10000);
     if (err) {
         std::cout << "Error 4: " << err.message << std::endl;
     }
@@ -46,7 +46,7 @@ int main() {
 
     // Создание лимитной заявки
     PlacedOrder limitOrder;
-    std::tie(limitOrder, err) = sandboxRest.LimitOrder(account.brokerAccountId, "BBG004730N88", 10, OperationType::Buy, 1.0);
+    std::tie(limitOrder, err) = sandboxRest.LimitOrder(account.brokerAccountId, "BBG005DXJS36", 10, OperationType::Buy, 1.0);
     if (err) {
         std::cout << "Error 5: " << err.message << std::endl;
     } else {
@@ -56,7 +56,7 @@ int main() {
 
     // Создание рыночной заявки
     PlacedOrder marketOrder;
-    std::tie(marketOrder, err) = sandboxRest.MarketOrder(account.brokerAccountId, "BBG004730N88", 10, OperationType::Buy);
+    std::tie(marketOrder, err) = sandboxRest.MarketOrder(account.brokerAccountId, "BBG005DXJS36", 10, OperationType::Buy);
     if (err) {
         std::cout << "Error 6: " << err.message << " " << err.code << std::endl;
     } else {
@@ -166,7 +166,7 @@ int main() {
 
     // Получение стакана по FIGI
     OrderBook orderBook;
-    std::tie(orderBook, err) = sandboxRest.Orderbook("BBG004730N88", 10);
+    std::tie(orderBook, err) = sandboxRest.Orderbook("BBG005DXJS36", 10);
     if (err) {
         std::cout << "Error 15: " << err.message << std::endl;
     } else {
@@ -176,7 +176,7 @@ int main() {
 
     // Получение исторических свечей по FIGI
     CandleList candles;
-    std::tie(candles, err) = sandboxRest.Candles("BBG004730N88", "2019-08-19T18:38:33+03:00", 
+    std::tie(candles, err) = sandboxRest.Candles("BBG005DXJS36", "2019-08-19T18:38:33+03:00", 
                                                     "2019-08-19T18:40:33+03:00", CandleInterval::_1min);
     if (err) {
         std::cout << "Error 16: " << err.message << std::endl;
@@ -187,7 +187,7 @@ int main() {
 
     // Получение инструмента по FIGI
     SearchMarketInstrument instrument;
-    std::tie(instrument, err) = sandboxRest.GetIntsrumentByFIGI("BBG004730N88");
+    std::tie(instrument, err) = sandboxRest.GetIntsrumentByFIGI("BBG005DXJS36");
     if (err) {
         std::cout << "Error 17: " << err.message << std::endl;
     } else {
@@ -197,7 +197,7 @@ int main() {
 
     // Получение инструмента по тикеру
     MarketInstrumentList instrumentList;
-    std::tie(instrumentList, err) = sandboxRest.GetInstrumentByTicker("SBER");
+    std::tie(instrumentList, err) = sandboxRest.GetInstrumentByTicker("TCS");
     if (err) {
         std::cout << "Error 18: " << err.message << std::endl;
     } else {
@@ -207,7 +207,7 @@ int main() {
 
     // Получение списка операций
     OperationList operations;
-    std::tie(operations, err) = sandboxRest.Operations(account.brokerAccountId, "BBG004730N88", 
+    std::tie(operations, err) = sandboxRest.Operations(account.brokerAccountId, "BBG005DXJS36", 
                                                         "2019-08-19T18:38:33+03:00", "2019-08-19T18:40:33+03:00");
     if (err) {
         std::cout << "Error 19: " << err.message << std::endl;
