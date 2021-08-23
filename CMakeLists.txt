@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(./include ./src)
 
 include(FetchContent)
+
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/whoshuu/cpr.git GIT_TAG f4622efcb59d84071ae11404ae61bd821c1c344b)
 FetchContent_MakeAvailable(cpr)
 
@@ -14,14 +15,14 @@ FetchContent_Declare(json GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohm
 FetchContent_MakeAvailable(json)
 
 set(
-    SOURCE_FILES 
-    ./src/SandboxRestClient.cpp 
-    ./src/utils.cpp 
-    ./src/RestClient.cpp 
-    ./src/RestProvider.cpp 
-    ./src/Order.cpp 
-    ./src/PlacedOrder.cpp 
-    ./src/MoneyAmount.cpp 
+    SOURCE_FILES
+    ./src/SandboxRestClient.cpp
+    ./src/utils.cpp
+    ./src/RestClient.cpp
+    ./src/RestProvider.cpp
+    ./src/Order.cpp
+    ./src/PlacedOrder.cpp
+    ./src/MoneyAmount.cpp
     ./src/Candle.cpp
     ./src/CurrencyPosition.cpp
     ./src/MarketInstrument.cpp

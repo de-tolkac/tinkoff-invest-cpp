@@ -58,7 +58,7 @@ int main() {
     PlacedOrder marketOrder;
     std::tie(marketOrder, err) = sandboxRest.MarketOrder(account.brokerAccountId, "BBG005DXJS36", 10, OperationType::Buy);
     if (err) {
-        std::cout << "Error 6: " << err.message << " " << err.code << std::endl;
+        std::cout << "Error 6: " << err.message << " " << std::endl;
     } else {
         std::cout << "Placed market order: " << marketOrder.orderId << std::endl << std::endl;
     }

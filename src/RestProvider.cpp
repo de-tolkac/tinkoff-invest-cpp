@@ -3,9 +3,6 @@
 #include <utils.h>
 #include <Http.h>
 
-#include <nlohmann/json.hpp>
-#include <cpr/cpr.h> 
-
 #include <string>
 #include <iostream>
 

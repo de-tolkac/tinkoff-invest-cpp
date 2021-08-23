@@ -1,15 +1,17 @@
+#pragma once
+
 #include <Error.h>
 
 #include <cpr/cpr.h>
 #include <nlohmann/json.hpp>
 
 #include <utility>
+#include <iostream>
 
 using Json = nlohmann::json;
 
-
 template<typename T>
-std::pair<T, Error> handlePostRequest(const char* url, const char* jsonAt, const std::string& token, std::string& body, cpr::Parameters& params) {
+inline std::pair<T, Error> handlePostRequest(const char* url, const char* jsonAt, const std::string& token, std::string& body, cpr::Parameters& params) {
     std::pair<T, Error> result;
 
     cpr::Response response = cpr::Post(cpr::Url{url},
@@ -60,7 +62,7 @@ std::pair<T, Error> handlePostRequest(const char* url, const char* jsonAt, const
     return result;
 }
 
-Error handlePostRequest(const char* url, const char* jsonAt, const std::string& token, std::string& body, cpr::Parameters& params) {
+inline Error handlePostRequest(const char* url, const char* jsonAt, const std::string& token, std::string& body, cpr::Parameters& params) {
     Error result;
 
     cpr::Response response = cpr::Post(cpr::Url{url},
@@ -104,7 +106,7 @@ Error handlePostRequest(const char* url, const char* jsonAt, const std::string& 
 }
 
 template<typename T>
-std::pair<T, Error> handleGetRequest(const char* url, const char* jsonAt, const std::string& token, cpr::Parameters& params) {
+inline std::pair<T, Error> handleGetRequest(const char* url, const char* jsonAt, const std::string& token, cpr::Parameters& params) {
     std::pair<T, Error> result;
 
     cpr::Response response = cpr::Get(cpr::Url{url},

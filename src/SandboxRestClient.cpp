@@ -1,6 +1,7 @@
 #include <SandboxRestClient.h>
 #include <UrlLib.h>
 #include <utils.h>
+#include <Http.h>
 
 #include <nlohmann/json.hpp>
 #include <cpr/cpr.h> 
@@ -19,65 +20,20 @@ SandboxRestClient::SandboxRestClient(std::string& _token)
     , token(_token)
 {}
 
-SandboxRestClient::~SandboxRestClient() { }
+SandboxRestClient::~SandboxRestClient() {}
 
 std::pair<SandboxAccount, Error> SandboxRestClient::Register(BrokerAccountType t) const {
-    std::pair<SandboxAccount, Error> result;
-
-    cpr::Response response = cpr::Post(cpr::Url{URL::Sandbox::Register},
-                               cpr::Body{"{\"brokerAccountType\": \"" + to_string(t) + "\"}"},
-                               cpr::Bearer{token},
-                               cpr::VerifySsl{false});
+    cpr::Parameters params;
     
-    if (response.status_code == 200) {
-        try {
-            Json json = Json::parse(response.text);
-            
-            result.first = json.at("payload").get<SandboxAccount>();
-            result.second.code = "Ok";
-        }
-        catch(std::string& error) {
-            result.second.message = error;
-            result.second.code = "Error";
-        }
-        catch(...) {
-            result.second.message = "Invalid Response";
-            result.second.code = "Error";
-        }
-        
-        return result;
-    } else if (response.status_code == 500) {
-        try {
-            Json json = Json::parse(response.text);
-            
-            result.second.message = json.at("payload").at("message");
-            result.second.code = json.at("payload").at("code");
-        }
-        catch(std::string& error) {
-            result.second.message = error;
-            result.second.code = "Error";
-        }
-        catch(...) {
-            result.second.message = "Invalid Response";
-            result.second.code = "Error";
-        }
+    std::string body = "{\"brokerAccountType\": \"" + to_string(t) + "\"}";
 
-        return result;
-    } 
-
-    result.second.message = "Invalid Response";
-    result.second.code = "Error";
-
-    return result;
+    return handlePostRequest<SandboxAccount>(URL::Sandbox::Register, "", token, body, params);
 }
 
 Error SandboxRestClient::SetCurrencyBalance(std::string id, Currency cur, double val) const {
-    Error result;
-
-    std::string url = URL::Sandbox::CurrenciesBalance;
+    cpr::Parameters params;
     if (id.length()) {
-        url += "?brokerAccountId=";
-        url += id;
+        params.Add({"brokerAccountId", id});
     }
 
     std::string body = "{\"currency\": \"";
@@ -86,47 +42,13 @@ Error SandboxRestClient::SetCurrencyBalance(std::string id, Currency cur, double
     body += std::to_string(val);
     body += "}";
 
-    cpr::Response response = cpr::Post(cpr::Url{url},
-                                        cpr::Body{body},
-                                        cpr::Bearer{token},
-                                        cpr::VerifySsl{false});
-
-    if (response.status_code == 500) {
-        try {
-            Json json = Json::parse(response.text);
-
-            result.message = json.at("payload").at("message");
-            result.code = json.at("payload").at("code");
-        }
-        catch(std::string& error) {
-            result.message = error;
-            result.code = "Error";
-        }
-        catch(...) {
-            result.message = "Invalid Response";
-            result.code = "Error";
-        }
-        
-        return result;
-    } else if (response.status_code != 200) {
-        result.code = "Error";
-        result.message = "Invalid Response";
-        
-        return result;
-    }
-    
-    result.code = "Ok";
-
-    return result;
+    return handlePostRequest(URL::Sandbox::CurrenciesBalance, "", token, body, params);
 }
 
 Error SandboxRestClient::SetPositionsBalance(std::string id, std::string figi, double val) const {
-    Error result;
-
-    std::string url = URL::Sandbox::PositionsBalance;
+    cpr::Parameters params;
     if (id.length()) {
-        url += "?brokerAccountId=";
-        url += id;
+        params.Add({"brokerAccountId", id});
     }
 
     std::string body = "{\"figi\": \"";
@@ -135,122 +57,29 @@ Error SandboxRestClient::SetPositionsBalance(std::string id, std::string figi, d
     body += std::to_string(val);
     body += "}";
 
-    cpr::Response response = cpr::Post(cpr::Url{url},
-                                        cpr::Body{body},
-                                        cpr::Bearer{token},
-                                        cpr::VerifySsl{false});
-
-    if (response.status_code == 500) {
-        try {
-            Json json = Json::parse(response.text);
-
-            result.message = json.at("payload").at("message");
-            result.code = json.at("payload").at("code");
-        }
-        catch(std::string& error) {
-            result.message = error;
-            result.code = "Error";
-        }
-        catch(...) {
-            result.message = "Invalid Response";
-            result.code = "Error";
-        }
-
-        return result;
-    } else if (response.status_code != 200) {
-        result.code = "Error";
-        result.message = "Invalid Response";
-        
-        return result;
-    }
-
-    result.code = "Ok";
-
-    return result;
+    return handlePostRequest(URL::Sandbox::PositionsBalance, "", token, body, params);
 }
 
 Error SandboxRestClient::Remove(std::string id) const {
-    Error result;
-
-    std::string url = URL::Sandbox::Remove;
+    cpr::Parameters params;
     if (id.length()) {
-        url += "?brokerAccountId=";
-        url += id;
+        params.Add({"brokerAccountId", id});
     }
 
-    cpr::Response response = cpr::Post(cpr::Url{url},
-                                        cpr::Bearer{token},
-                                        cpr::VerifySsl{false});
+    std::string body;
 
-    if (response.status_code == 500) {
-        try {
-            Json json = Json::parse(response.text);
-
-            result.message = json.at("payload").at("message");
-            result.code = json.at("payload").at("code");
-        }
-        catch(std::string& error) {
-            result.message = error;
-            result.code = "Error";
-        }
-        catch(...) {
-            result.message = "Invalid Response";
-            result.code = "Error";
-        }
-
-        return result;
-    } else if (response.status_code != 200) {
-        result.code = "Error";
-        result.message = "Invalid Response";
-        
-        return result;
-    }
-
-    result.code = "Ok";
-
-    return result;
+    return handlePostRequest(URL::Sandbox::Remove, "", token, body, params);
 }
 
 Error SandboxRestClient::Clear(std::string id) const {
-    Error result;
-
-    std::string url = URL::Sandbox::Clear;
+    cpr::Parameters params;
     if (id.length()) {
-        url += "?brokerAccountId=";
-        url += id;
+        params.Add({"brokerAccountId", id});
     }
 
-    cpr::Response response = cpr::Post(cpr::Url{url},
-                                        cpr::Bearer{token},
-                                        cpr::VerifySsl{false});
+    std::string body;
 
-    if (response.status_code == 500) {
-        try {
-            Json json = Json::parse(response.text);
-
-            result.message = json.at("payload").at("message");
-            result.code = json.at("payload").at("code");
-        }
-        catch(std::string& error) {
-            result.message = error;
-            result.code = "Error";
-        }
-        catch(...) {
-            result.message = "Invalid Response";
-            result.code = "Error";
-        }
-
-        return result;
-    } else if (response.status_code != 200) {
-        result.code = "Error";
-        result.message = "Invalid Response";
-        
-        return result;
-    }
-
-    result.code = "Ok";
-
-    return result;
+    return handlePostRequest(URL::Sandbox::Clear, "", token, body, params);
 }
 
 // Orders
