@@ -4,6 +4,7 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
 
 void to_json(Json& j, const PortfolioPosition& position) {
     j = Json {
@@ -81,4 +82,6 @@ bool operator==(const PortfolioPosition& lhs, const PortfolioPosition& rhs) {
             lhs.lots == rhs.lots && lhs.isin == rhs.isin && lhs.blocked == rhs.blocked &&
             lhs.expectedYield == rhs.expectedYield && lhs.averagePositionPrice == rhs.averagePositionPrice &&
             lhs.averagePositionPriceNoNkd == rhs.averagePositionPriceNoNkd;
+}
+
 }

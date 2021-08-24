@@ -9,6 +9,7 @@
 
 #include <nlohmann/json.hpp>
 
+namespace ti {
 
 struct Order {
     std::string orderId;
@@ -31,3 +32,5 @@ void from_json(const nlohmann::json&, Order&);
 bool operator==(const Order&, const Order&);
 
 using OrderList = std::vector<Order>;
+
+}

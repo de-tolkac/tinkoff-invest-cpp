@@ -1,5 +1,7 @@
 #pragma once
 
+namespace ti {
+
 namespace URL {
     namespace Sandbox {
         // Sandbox
@@ -63,4 +65,6 @@ namespace URL {
         // User
         constexpr char UserAccounts[]         = "https://api-invest.tinkoff.ru/openapi/user/accounts";
     }
+}
+
 }

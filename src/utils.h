@@ -15,6 +15,7 @@
 #include <string>
 #include <ctime>
 
+namespace ti {
 
 std::string to_string(BrokerAccountType);
 std::string to_string(CandleInterval);
@@ -41,3 +42,5 @@ OperationType toOperationType(std::string&&);
 TradeStatus toTradeStatus(std::string&&);
 OperationTypeWithCommission toOperationTypeWithCommission(std::string&&);
 time_t toDate(std::string&&);
+
+}

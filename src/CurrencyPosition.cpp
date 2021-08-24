@@ -6,6 +6,8 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
+
 void to_json(Json& j, const CurrencyPosition& c) {
     j = Json {
                 {"currency", to_string(c.currency)},
@@ -37,4 +39,6 @@ void from_json(const Json& j, CurrencyPosition& c) {
 
 bool operator==(const CurrencyPosition& lhs, const CurrencyPosition& rhs) {
     return lhs.currency == rhs.currency && lhs.balance == rhs.balance && lhs.blocked == rhs.blocked;
+}
+
 }

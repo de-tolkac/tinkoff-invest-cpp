@@ -9,6 +9,8 @@
 
 using Json = nlohmann::json;
 
+using namespace ti;
+
 TEST(json_test, Candle_get) {
     Json j = R"(
         {

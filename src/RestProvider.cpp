@@ -8,6 +8,8 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
+
 RestProvider::RestProvider(char* _token)
     : token(_token)
 {}
@@ -158,4 +160,6 @@ std::pair<UserAccountList, Error> RestProvider::Accounts(const char* url) const 
     cpr::Parameters params{};
 
     return handleGetRequest<UserAccountList>(url, "accounts", token, params);
+}
+
 }

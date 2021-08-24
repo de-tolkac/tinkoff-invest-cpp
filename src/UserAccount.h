@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-
+namespace ti {
 
 struct UserAccount {
     BrokerAccountType brokerAccountType;
@@ -26,3 +26,5 @@ void from_json(const nlohmann::json&, UserAccount&);
 bool operator==(const UserAccount&, const UserAccount&);
 
 using UserAccountList = std::vector<UserAccount>;
+
+}

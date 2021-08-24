@@ -4,6 +4,7 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
 
 Operation::Operation() 
     : trades()
@@ -132,4 +133,6 @@ bool operator==(const Operation& lhs, const Operation& rhs) {
             lhs.instrumentType == rhs.instrumentType && 
             lhs.isMarginCall == rhs.isMarginCall && lhs.date == rhs.date &&
             lhs.operationType == rhs.operationType;
+}
+
 }

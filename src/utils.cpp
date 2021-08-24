@@ -1,5 +1,7 @@
 #include <utils.h>
 
+namespace ti {
+
 std::string to_string(BrokerAccountType type) {
     if (type == BrokerAccountType::Tinkoff) {
         return "Tinkoff";
@@ -466,4 +468,6 @@ time_t toDate(std::string&& t) {
     struct tm time;
     strptime(t.c_str(), "%Y-%m-%dT%H:%M:%S%c%c%c:%c%c", &time);
     return timegm(&time);
+}
+
 }

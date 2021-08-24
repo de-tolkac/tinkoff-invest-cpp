@@ -7,27 +7,7 @@
 
 using Json = nlohmann::json;
 
-/*
-void printOrderBook(OrderBook& o) {
-    std::cout << o.figi << std::endl;
-    std::cout << o.depth << std::endl;
-    std::cout << toString(o.tradeStatus) << std::endl;
-    std::cout << o.minPriceIncrement << std::endl;
-    std::cout << *o.faceValue << std::endl;
-    std::cout << *o.lastPrice << std::endl;
-    std::cout << *o.closePrice << std::endl;
-    std::cout << *o.limitDown << std::endl;
-    std::cout << *o.limitUp << std::endl;
-    std::cout << "Bids:\n";
-    for (auto& b : o.bids) {
-        std::cout << b.price << " - " << b.quantity << std::endl;
-    }
-    std::cout << "Asks:\n";
-    for (auto& a : o.asks) {
-        std::cout << a.price << " - " << a.quantity << std::endl;
-    }
-}
-*/
+using namespace ti;
 
 TEST(json_test, OrderBook_get) {
     Json j = R"(

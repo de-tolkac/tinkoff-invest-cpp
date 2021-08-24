@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-
+namespace ti {
 
 struct PortfolioPosition {
     std::string figi;
@@ -34,3 +34,5 @@ void from_json(const nlohmann::json&, PortfolioPosition&);
 bool operator==(const PortfolioPosition&, const PortfolioPosition&);
 
 using PortfolioPositionList = std::vector<PortfolioPosition>;
+
+}

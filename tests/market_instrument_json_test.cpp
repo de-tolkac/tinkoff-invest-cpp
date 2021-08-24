@@ -6,6 +6,8 @@
 
 using Json = nlohmann::json;
 
+using namespace ti;
+
 TEST(json_test, MarketInstrument_get) {
     Json j = R"(
         {

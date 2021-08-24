@@ -7,6 +7,8 @@
 
 #include <nlohmann/json.hpp>
 
+namespace ti {
+
 struct Candle {
     std::string figi;
     
@@ -27,3 +29,5 @@ void from_json(const nlohmann::json&, Candle&);
 bool operator==(const Candle&, const Candle&);
 
 using CandleList = std::vector<Candle>;
+
+}

@@ -4,6 +4,8 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
+
 void to_json(Json& j, const MarketInstrument& instr) {
     j = Json {
                 {"figi", instr.figi},
@@ -70,4 +72,6 @@ bool operator==(const MarketInstrument& lhs, const MarketInstrument& rhs) {
             lhs.minPriceIncrement == rhs.minPriceIncrement &&
             lhs.lot == rhs.lot && lhs.minQuantity == rhs.minQuantity &&
             lhs.currency == rhs.currency && lhs.type == rhs.type;
+}
+
 }

@@ -6,6 +6,8 @@
 
 #include <nlohmann/json.hpp>
 
+namespace ti {
+
 struct CurrencyPosition {
     Currency currency;
 
@@ -19,3 +21,5 @@ void from_json(const nlohmann::json&, CurrencyPosition&);
 bool operator==(const CurrencyPosition&, const CurrencyPosition&);
 
 using CurrencyPositionList = std::vector<CurrencyPosition>;
+
+}

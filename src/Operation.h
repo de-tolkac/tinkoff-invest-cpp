@@ -14,6 +14,8 @@
 
 #include <nlohmann/json.hpp>
 
+namespace ti {
+
 struct Operation {
     std::string id;
 
@@ -46,3 +48,5 @@ void from_json(const nlohmann::json&, Operation&);
 bool operator==(const Operation&, const Operation&);
 
 using OperationList = std::vector<Operation>;
+
+}

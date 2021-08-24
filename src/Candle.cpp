@@ -4,7 +4,10 @@
 
 #include <ctime>
 
+
 using Json = nlohmann::json;
+
+namespace ti {
 
 void to_json(Json& j, const Candle& candle) {
     j = Json {
@@ -46,4 +49,6 @@ bool operator==(const Candle& lhs, const Candle& rhs) {
             lhs.openPrice == rhs.openPrice && lhs.closePrice == rhs.closePrice &&
             lhs.highPrice == rhs.highPrice && lhs.lowPrice == rhs.lowPrice &&
             lhs.volume == rhs.volume && lhs.time == rhs.time;
+}
+
 }

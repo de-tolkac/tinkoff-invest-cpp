@@ -4,6 +4,7 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
 
 SandboxAccount::SandboxAccount() {}
 
@@ -36,4 +37,6 @@ void from_json(const Json& j, SandboxAccount& account) {
 
 bool operator==(const SandboxAccount& lhs, const SandboxAccount& rhs) {
     return lhs.brokerAccountId == rhs.brokerAccountId && lhs.brokerAccountType == rhs.brokerAccountType;
+}
+
 }

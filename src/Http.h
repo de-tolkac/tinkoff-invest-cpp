@@ -7,6 +7,7 @@
 
 #include <utility>
 
+namespace ti {
 
 template<typename T>
 inline std::pair<T, Error> handlePostRequest(const char* url, const char* jsonAt, const std::string& token, std::string& body, cpr::Parameters& params) {
@@ -152,4 +153,6 @@ inline std::pair<T, Error> handleGetRequest(const char* url, const char* jsonAt,
     }
     
     return result;
+}
+
 }

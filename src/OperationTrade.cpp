@@ -4,6 +4,7 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
 
 void to_json(Json& j, const OperationTrade& op) {
     try {
@@ -39,4 +40,6 @@ void from_json(const Json& j, OperationTrade& op) {
 bool operator==(const OperationTrade& lhs, const OperationTrade& rhs) {
     return  lhs.tradeId == rhs.tradeId && lhs.date == rhs.date &&
             lhs.price == rhs.price && lhs.quantity == rhs.quantity;
+}
+
 }

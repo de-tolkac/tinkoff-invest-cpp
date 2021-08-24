@@ -10,6 +10,8 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
+
 SandboxRestClient::SandboxRestClient(char* _token) 
     : RestProvider(_token)
     , token(_token)
@@ -165,4 +167,6 @@ std::pair<OperationList, Error> SandboxRestClient::Operations(std::string id, st
 // User
 std::pair<UserAccountList, Error> SandboxRestClient::Accounts() const {
     return RestProvider::Accounts(URL::Sandbox::UserAccounts);
+}
+
 }

@@ -8,6 +8,8 @@
 
 using Json = nlohmann::json;
 
+using namespace ti;
+
 TEST(json_test, CurrencyPosition_get) {
     Json j = R"(
         {

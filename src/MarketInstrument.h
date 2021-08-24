@@ -8,6 +8,8 @@
 
 #include <nlohmann/json.hpp>
 
+namespace ti {
+
 struct MarketInstrument {
     std::string figi;
     std::string ticker;
@@ -29,3 +31,5 @@ void from_json(const nlohmann::json&, MarketInstrument&);
 bool operator==(const MarketInstrument&, const MarketInstrument&);
 
 using MarketInstrumentList = std::vector<MarketInstrument>;
+
+}

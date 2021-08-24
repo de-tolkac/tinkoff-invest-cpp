@@ -1,5 +1,7 @@
 #include <Portfolio.h>
 
+namespace ti {
+
 bool operator==(const PortfolioInfo& lhs, const PortfolioInfo& rhs) {
     if (lhs.positions.size() != rhs.positions.size()) {
         return false;
@@ -22,4 +24,6 @@ bool operator==(const PortfolioInfo& lhs, const PortfolioInfo& rhs) {
     }
 
     return true;
+}
+
 }

@@ -2,6 +2,8 @@
 #include <UrlLib.h>
 #include <utils.h>
 
+namespace ti {
+
 // Orders
 std::pair<OrderList, Error> RestClient::Orders(std::string& id) const {
     return RestProvider::Orders(URL::Production::Orders, id);
@@ -85,4 +87,6 @@ std::pair<OperationList, Error> RestClient::Operations(std::string& id, std::str
 // User
 std::pair<UserAccountList, Error> RestClient::Accounts() const {
     return RestProvider::Accounts(URL::Production::UserAccounts);
+}
+
 }

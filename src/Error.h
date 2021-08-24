@@ -2,6 +2,8 @@
 
 #include <string>
 
+namespace ti {
+
 struct Error {
     std::string message;
     std::string code;
@@ -10,3 +12,5 @@ struct Error {
         return code != "Ok";
     }
 };
+
+}

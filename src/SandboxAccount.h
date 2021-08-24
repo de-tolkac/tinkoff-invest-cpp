@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-
+namespace ti {
 
 struct SandboxAccount {
     BrokerAccountType brokerAccountType;
@@ -24,3 +24,5 @@ void to_json(nlohmann::json&, const SandboxAccount&);
 void from_json(const nlohmann::json&, SandboxAccount&);
 
 bool operator==(const SandboxAccount&, const SandboxAccount&);
+
+}

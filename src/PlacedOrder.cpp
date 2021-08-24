@@ -4,6 +4,7 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
 
 void to_json(Json& j, const PlacedOrder& order) {
     j = Json {
@@ -63,4 +64,6 @@ bool operator==(const PlacedOrder& lhs, const PlacedOrder& rhs) {
             lhs.status == rhs.status && lhs.requestedLots == rhs.requestedLots &&
             lhs.executedLots == rhs.executedLots && lhs.rejectReason == rhs.rejectReason &&
             lhs.message == rhs.message && lhs.commission == rhs.commission;
+}
+
 }

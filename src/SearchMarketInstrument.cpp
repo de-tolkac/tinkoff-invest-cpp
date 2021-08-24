@@ -5,6 +5,7 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
 
 void to_json(Json& j, const SearchMarketInstrument& instrument) {
     j = Json {
@@ -62,4 +63,6 @@ bool operator==(const SearchMarketInstrument& lhs, const SearchMarketInstrument&
     return  lhs.figi == rhs.figi && lhs.ticker == rhs.ticker && lhs.name == rhs.name &&
             lhs.lot == rhs.lot && lhs.type == rhs.type && lhs.isin == rhs.isin &&
             lhs.minPriceIncrement == rhs.minPriceIncrement && lhs.currency == rhs.currency;
+}
+
 }

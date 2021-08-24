@@ -9,7 +9,7 @@
 
 #include <nlohmann/json.hpp>
 
-
+namespace ti {
 
 struct PlacedOrder {
     std::string orderId;
@@ -29,3 +29,5 @@ void to_json(nlohmann::json&, const PlacedOrder&);
 void from_json(const nlohmann::json&, PlacedOrder&);
 
 bool operator==(const PlacedOrder&, const PlacedOrder&);
+
+}

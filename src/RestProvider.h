@@ -19,6 +19,8 @@
 #include <vector>
 #include <ctime>
 
+namespace ti {
+
 class RestProvider {
     std::string token;
 protected:
@@ -50,3 +52,5 @@ protected:
     // User
     std::pair<UserAccountList, Error> Accounts(const char*) const;
 };
+
+}

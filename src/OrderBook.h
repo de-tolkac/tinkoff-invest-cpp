@@ -9,7 +9,7 @@
 
 #include <nlohmann/json.hpp>
 
-
+namespace ti {
 
 struct OrderBook {
     std::string figi;
@@ -34,3 +34,5 @@ void to_json(nlohmann::json&, const OrderBook&);
 void from_json(const nlohmann::json&, OrderBook&);
 
 bool operator==(const OrderBook&, const OrderBook&);
+
+}

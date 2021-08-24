@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 
+using namespace ti;
+
 int main() {
     std::string token;
     

@@ -4,6 +4,7 @@
 
 using Json = nlohmann::json;
 
+namespace ti {
 
 UserAccount::UserAccount() {}
 UserAccount::UserAccount(BrokerAccountType type, std::string id) {
@@ -40,4 +41,6 @@ void from_json(const Json& j, UserAccount& account) {
 
 bool operator==(const UserAccount& lhs, const UserAccount& rhs) {
     return lhs.brokerAccountId == rhs.brokerAccountId && lhs.brokerAccountType == rhs.brokerAccountType;
+}
+
 }

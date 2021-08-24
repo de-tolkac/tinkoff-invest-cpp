@@ -23,6 +23,8 @@
 #include <vector>
 #include <ctime>
 
+namespace ti {
+
 class SandboxRestClient : private RestProvider {
     std::string token;
 public:
@@ -67,3 +69,5 @@ public:
     // User
     std::pair<UserAccountList, Error> Accounts() const;
 };
+
+}
