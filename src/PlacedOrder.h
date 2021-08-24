@@ -9,7 +9,6 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
 
 
 struct PlacedOrder {
@@ -26,7 +25,7 @@ struct PlacedOrder {
     std::optional<MoneyAmount> commission;
 };
 
-void to_json(Json&, const PlacedOrder&);
-void from_json(const Json&, PlacedOrder&);
+void to_json(nlohmann::json&, const PlacedOrder&);
+void from_json(const nlohmann::json&, PlacedOrder&);
 
 bool operator==(const PlacedOrder&, const PlacedOrder&);

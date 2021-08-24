@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <climits>
 
 int main() {
     std::string token;

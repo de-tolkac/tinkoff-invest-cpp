@@ -9,7 +9,6 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
 
 struct Order {
     std::string orderId;
@@ -26,8 +25,8 @@ struct Order {
     double price;
 };
 
-void to_json(Json&, const Order&);
-void from_json(const Json&, Order&);
+void to_json(nlohmann::json&, const Order&);
+void from_json(const nlohmann::json&, Order&);
 
 bool operator==(const Order&, const Order&);
 

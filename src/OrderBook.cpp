@@ -2,6 +2,9 @@
 
 #include <utils.h>
 
+using Json = nlohmann::json;
+
+
 void to_json(Json& j, const OrderBook& orderBook) {
     j = Json {
                 {"figi", orderBook.figi},

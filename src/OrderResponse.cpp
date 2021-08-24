@@ -2,6 +2,9 @@
 
 #include <string>
 
+using Json = nlohmann::json;
+
+
 void to_json(Json& j, const OrderResponse& orderResponse) {
     j = Json {
                 {"price", std::to_string(orderResponse.price)},

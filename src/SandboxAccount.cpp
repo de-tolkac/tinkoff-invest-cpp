@@ -2,6 +2,8 @@
 
 #include <utils.h>
 
+using Json = nlohmann::json;
+
 
 SandboxAccount::SandboxAccount() {}
 
@@ -9,18 +11,6 @@ SandboxAccount::SandboxAccount(BrokerAccountType type, std::string id) {
     brokerAccountType = type;
     brokerAccountId = id;
 }
-/*
-SandboxAccount::SandboxAccount(std::pair<SandboxAccount, Error>&& t) {
-    brokerAccountType = t.first.brokerAccountType;
-    brokerAccountId   = t.first.brokerAccountId;
-}
-
-SandboxAccount& SandboxAccount::operator=(std::pair<SandboxAccount, Error>&& t) {
-    brokerAccountType = t.first.brokerAccountType;
-    brokerAccountId   = t.first.brokerAccountId;
-    return *this;
-}
-*/
 
 void to_json(Json& j, const SandboxAccount& account) {
     j = Json {

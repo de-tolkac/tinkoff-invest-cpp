@@ -4,6 +4,8 @@
 
 #include <ctime>
 
+using Json = nlohmann::json;
+
 void to_json(Json& j, const Candle& candle) {
     j = Json {
                 {"figi", candle.figi},

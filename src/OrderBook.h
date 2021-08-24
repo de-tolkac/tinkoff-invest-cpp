@@ -9,7 +9,7 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
+
 
 struct OrderBook {
     std::string figi;
@@ -30,7 +30,7 @@ struct OrderBook {
     std::optional<double> limitDown;    
 };
 
-void to_json(Json&, const OrderBook&);
-void from_json(const Json&, OrderBook&);
+void to_json(nlohmann::json&, const OrderBook&);
+void from_json(const nlohmann::json&, OrderBook&);
 
 bool operator==(const OrderBook&, const OrderBook&);

@@ -6,9 +6,7 @@
 #include <nlohmann/json.hpp>
 
 #include <utility>
-#include <iostream>
 
-using Json = nlohmann::json;
 
 template<typename T>
 inline std::pair<T, Error> handlePostRequest(const char* url, const char* jsonAt, const std::string& token, std::string& body, cpr::Parameters& params) {
@@ -22,7 +20,7 @@ inline std::pair<T, Error> handlePostRequest(const char* url, const char* jsonAt
 
     if (response.status_code == 200) {
         try {
-            Json json = Json::parse(response.text);
+            nlohmann::json json = nlohmann::json::parse(response.text);
 
             if (!strlen(jsonAt)) {
                 result.first = json.at("payload").get<T>();
@@ -45,7 +43,7 @@ inline std::pair<T, Error> handlePostRequest(const char* url, const char* jsonAt
     }
 
     try {
-        Json json = Json::parse(response.text);
+        nlohmann::json json = nlohmann::json::parse(response.text);
         
         result.second.message = json.at("payload").at("message");
         result.second.code = json.at("payload").at("code");
@@ -88,7 +86,7 @@ inline Error handlePostRequest(const char* url, const char* jsonAt, const std::s
     }
 
     try {
-        Json json = Json::parse(response.text);
+        nlohmann::json json = nlohmann::json::parse(response.text);
         
         result.message = json.at("payload").at("message");
         result.code = json.at("payload").at("code");
@@ -116,7 +114,7 @@ inline std::pair<T, Error> handleGetRequest(const char* url, const char* jsonAt,
 
     if (response.status_code == 200) {
         try {
-            Json json = Json::parse(response.text);
+            nlohmann::json json = nlohmann::json::parse(response.text);
 
             if (!strlen(jsonAt)) {
                 result.first = json.at("payload").get<T>();
@@ -139,7 +137,7 @@ inline std::pair<T, Error> handleGetRequest(const char* url, const char* jsonAt,
     }
 
     try {
-        Json json = Json::parse(response.text);
+        nlohmann::json json = nlohmann::json::parse(response.text);
         
         result.second.message = json.at("payload").at("message");
         result.second.code = json.at("payload").at("code");

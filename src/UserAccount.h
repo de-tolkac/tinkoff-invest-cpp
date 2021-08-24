@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
+
 
 struct UserAccount {
     BrokerAccountType brokerAccountType;
@@ -18,18 +18,10 @@ struct UserAccount {
     UserAccount(BrokerAccountType, std::string);
 
     UserAccount(std::pair<UserAccount, Error>&&);
-
-    /*
-    UserAccount& operator=(std::pair<UserAccount, Error>&& t) {
-        brokerAccountType = t.first.brokerAccountType;
-        brokerAccountId   = t.first.brokerAccountId;
-        return *this;
-    }
-    */
 };
 
-void to_json(Json&, const UserAccount&);
-void from_json(const Json&, UserAccount&);
+void to_json(nlohmann::json&, const UserAccount&);
+void from_json(const nlohmann::json&, UserAccount&);
 
 bool operator==(const UserAccount&, const UserAccount&);
 

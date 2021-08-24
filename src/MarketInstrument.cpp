@@ -2,6 +2,8 @@
 
 #include <utils.h>
 
+using Json = nlohmann::json;
+
 void to_json(Json& j, const MarketInstrument& instr) {
     j = Json {
                 {"figi", instr.figi},

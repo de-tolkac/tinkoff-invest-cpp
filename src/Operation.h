@@ -14,8 +14,6 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
-
 struct Operation {
     std::string id;
 
@@ -42,8 +40,8 @@ struct Operation {
     Operation();
 };
 
-void to_json(Json&, const Operation&);
-void from_json(const Json&, Operation&);
+void to_json(nlohmann::json&, const Operation&);
+void from_json(const nlohmann::json&, Operation&);
 
 bool operator==(const Operation&, const Operation&);
 

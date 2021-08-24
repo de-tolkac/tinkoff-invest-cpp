@@ -4,6 +4,8 @@
 
 #include <string>
 
+using Json = nlohmann::json;
+
 void to_json(Json& j, const CurrencyPosition& c) {
     j = Json {
                 {"currency", to_string(c.currency)},

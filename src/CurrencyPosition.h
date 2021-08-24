@@ -6,8 +6,6 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
-
 struct CurrencyPosition {
     Currency currency;
 
@@ -15,8 +13,8 @@ struct CurrencyPosition {
     std::optional<double> blocked;
 };
 
-void to_json(Json&, const CurrencyPosition&);
-void from_json(const Json&, CurrencyPosition&);
+void to_json(nlohmann::json&, const CurrencyPosition&);
+void from_json(const nlohmann::json&, CurrencyPosition&);
 
 bool operator==(const CurrencyPosition&, const CurrencyPosition&);
 

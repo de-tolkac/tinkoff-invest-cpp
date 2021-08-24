@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
+
 
 struct PortfolioPosition {
     std::string figi;
@@ -28,8 +28,8 @@ struct PortfolioPosition {
     std::optional<MoneyAmount> averagePositionPriceNoNkd;
 };
 
-void to_json(Json&, const PortfolioPosition&);
-void from_json(const Json&, PortfolioPosition&);
+void to_json(nlohmann::json&, const PortfolioPosition&);
+void from_json(const nlohmann::json&, PortfolioPosition&);
 
 bool operator==(const PortfolioPosition&, const PortfolioPosition&);
 

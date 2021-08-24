@@ -2,6 +2,9 @@
 
 #include <utils.h>
 
+using Json = nlohmann::json;
+
+
 UserAccount::UserAccount() {}
 UserAccount::UserAccount(BrokerAccountType type, std::string id) {
     brokerAccountType = type;

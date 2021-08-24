@@ -5,7 +5,7 @@
 
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
+
 
 struct OperationTrade {
     std::string tradeId;
@@ -17,7 +17,7 @@ struct OperationTrade {
     int quantity;
 };
 
-void to_json(Json&, const OperationTrade&);
-void from_json(const Json&, OperationTrade&);
+void to_json(nlohmann::json&, const OperationTrade&);
+void from_json(const nlohmann::json&, OperationTrade&);
 
 bool operator==(const OperationTrade&, const OperationTrade&);

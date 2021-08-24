@@ -2,6 +2,8 @@
 
 #include <utils.h>
 
+using Json = nlohmann::json;
+
 void to_json(Json& j, const Order& order) {
     j = Json {
                 {"orderId", order.orderId},
