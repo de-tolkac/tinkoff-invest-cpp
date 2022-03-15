@@ -7,11 +7,11 @@ using namespace ti;
 
 int main() {
     std::string token;
-    
+
     std::ifstream file("token.txt");
     file >> token;
     file.close();
-    
+
     SandboxRestClient sandboxRest(token);
 
     // Регистрация клиента в sandbox [SANDBOX]
@@ -23,7 +23,7 @@ int main() {
     }
 
 
-    // Получение брокерских счетов клиента 
+    // Получение брокерских счетов клиента
     UserAccountList userAccounts;
     std::tie(userAccounts, err) = sandboxRest.Accounts();
     if (err) {
@@ -43,7 +43,7 @@ int main() {
     if (err) {
         std::cout << "Error 4: " << err.message << std::endl;
     }
-    
+
 
     // Создание лимитной заявки
     PlacedOrder limitOrder;
@@ -84,7 +84,7 @@ int main() {
         }
         std::cout << std::endl;
     }
-    
+
 
     // Получение инструментальных активов клиента
     PortfolioPositionList positions;
@@ -177,7 +177,7 @@ int main() {
 
     // Получение исторических свечей по FIGI
     CandleList candles;
-    std::tie(candles, err) = sandboxRest.Candles("BBG005DXJS36", "2019-08-19T18:38:33+03:00", 
+    std::tie(candles, err) = sandboxRest.Candles("BBG005DXJS36", "2019-08-19T18:38:33+03:00",
                                                     "2019-08-19T18:40:33+03:00", CandleInterval::_1min);
     if (err) {
         std::cout << "Error 16: " << err.message << std::endl;
@@ -208,7 +208,7 @@ int main() {
 
     // Получение списка операций
     OperationList operations;
-    std::tie(operations, err) = sandboxRest.Operations(account.brokerAccountId, "BBG005DXJS36", 
+    std::tie(operations, err) = sandboxRest.Operations(account.brokerAccountId, "BBG005DXJS36",
                                                         "2019-08-19T18:38:33+03:00", "2019-08-19T18:40:33+03:00");
     if (err) {
         std::cout << "Error 19: " << err.message << std::endl;
@@ -231,6 +231,6 @@ int main() {
     } else {
         std::cout << "Account " << account.brokerAccountId << " removed\n";
     }
-    
+
     return 0;
 }
