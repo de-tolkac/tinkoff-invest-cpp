@@ -37,10 +37,7 @@ set(
 )
 
 add_library(tinvest SHARED ${SOURCE_FILES})
-target_link_libraries(tinvest PUBLIC cpr::cpr PUBLIC nlohmann_json::nlohmann_json)
-
-install(TARGETS tinvest cpr nlohmann_json DESTINATION /usr/lib)
-install(DIRECTORY include/ src/ DESTINATION include)
+target_link_libraries(tinvest PRIVATE cpr::cpr PRIVATE nlohmann_json::nlohmann_json)
 
 add_subdirectory(./examples)
 add_subdirectory(./tests)

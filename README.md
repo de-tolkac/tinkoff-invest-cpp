@@ -1,5 +1,5 @@
 # Tinkoff Invest OpenAPI C++
-Abandoned project of Tnkkoff OpenAPI SDK.
+Documentation in progress...
 
 ### Прогресс разработки: 
 * :heavy_check_mark: sandbox
